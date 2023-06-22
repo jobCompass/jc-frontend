@@ -1,6 +1,6 @@
 import bigLogo from '../assets/Vector.png';
 import Button from '../Utilities/Button';
-// import Google from '../Components/Google';
+import Google from '../Components/Google';
 // type eventType = {
 //   target: HTMLElement,
 //   preventDefault: () => void,
@@ -23,7 +23,7 @@ function HomePage() {
 
         <Button type="light" class="" text="Log in"/>
       </div>
-      {/* <Google /> */}
+      <Google />
 
     </div>
 
