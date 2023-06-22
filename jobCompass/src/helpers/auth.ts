@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import {auth, db} from "./fbconfig";
-import {type Error} from './pototype';
 // import * as dotenv from 'dotenv';
 import
   {
@@ -13,12 +12,7 @@ import
   } from "firebase/auth";
 import {collection, addDoc } from "firebase/firestore";
 import axios from "axios";
-// import * as dotenv from 'dotenv';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// dotenv.config();
 const server = 'https://app-6lov3rzemq-uc.a.run.app';
 const temp = 'http://127.0.0.1:5001/jobcampass-server/us-central1/app'
 
@@ -34,12 +28,11 @@ const signInWithGoogle = async () => {
     } else {
       return 'exist';
     }
-  } catch (err:Error) {
-    console.log(err.code,'msg',err.message);
-    if(err.code !== 'auth/popup-closed-by-user') {
+  } catch (err: any) {
+
+    if (err.code !=='auth/popup-closed-by-user') {
       alert(err);
     }
-
   }
 };
 
