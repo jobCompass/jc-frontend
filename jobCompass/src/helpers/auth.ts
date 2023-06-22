@@ -13,8 +13,8 @@ import
 import {collection, addDoc } from "firebase/firestore";
 import axios from "axios";
 
-const server = 'https://app-6lov3rzemq-uc.a.run.app';
-const temp = 'http://127.0.0.1:5001/jobcampass-server/us-central1/app'
+// const server = 'https://app-6lov3rzemq-uc.a.run.app';
+const server = 'http://127.0.0.1:5001/jobcampass-server/us-central1/app'
 
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
@@ -22,7 +22,7 @@ const signInWithGoogle = async () => {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
     console.log('user',user);
-    const check = await axios.post(`${temp}/login/${user.uid}`, user)
+    const check = await axios.post(`${server}/login/${user.uid}`, user)
     if (check.status === 204) {
       return {id: user.uid, name: user.displayName, email:user.email}
     } else {
