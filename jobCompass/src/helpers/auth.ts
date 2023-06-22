@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import {auth, db} from "./fbconfig";
-import Error from './pototype';
+import {type Error} from './pototype';
 // import * as dotenv from 'dotenv';
 import
   {
@@ -11,7 +11,7 @@ import
     sendPasswordResetEmail,
     signOut,
   } from "firebase/auth";
-import {query, getDocs,collection,where,addDoc } from "firebase/firestore";
+import {collection, addDoc } from "firebase/firestore";
 import axios from "axios";
 // import * as dotenv from 'dotenv';
 // TODO: Add SDKs for Firebase products that you want to use
