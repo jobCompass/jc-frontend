@@ -23,4 +23,5 @@ jobs:
           channelId: live
           projectId: jobcompass-frontend
           entryPoint: './jobCompass'
-
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
