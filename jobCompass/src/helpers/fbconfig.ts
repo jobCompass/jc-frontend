@@ -1,14 +1,15 @@
 import { initializeApp } from "firebase/app";
 import{getAuth} from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBKri49Y0RbZ2jQ0jbNfMyes5CCptTrRSc",
+  apiKey: import.meta.env.VITE_apiKey,
   authDomain: "jobcompass-frontend.firebaseapp.com",
   projectId: "jobcompass-frontend",
-  storageBucket: "jobcompass-frontend.appspot.com",
-  messagingSenderId: "976441790282",
-  appId: "1:976441790282:web:e2ae4be03c904ee089fbb3",
-  measurementId: "G-G12LC0KJFV"
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId:import.meta.env.VITE_messagingSenderId,
+  appId:import.meta.env.VITE_appId,
+  measurementId:import.meta.env.VITE_measurementId
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
