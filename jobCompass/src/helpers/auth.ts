@@ -9,7 +9,6 @@ import
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
     signOut,
-    getAdditionalUserInfo,
   } from "firebase/auth";
 import {collection, addDoc } from "firebase/firestore";
 import axios from "axios";

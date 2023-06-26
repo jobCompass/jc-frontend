@@ -1,7 +1,7 @@
 import Break from '../Utilities/Breakline';
 import google from '../assets/google.png';
 import {signInWithGoogle} from '../helpers/auth';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 export default function Google () {
   const naviagte = useNavigate()
   async function signIn () {
