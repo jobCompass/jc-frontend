@@ -7,13 +7,18 @@ jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./jobCompass
     steps:
       - uses: actions/checkout@v3
-      - run: npm install
-      - run: npm run build
+      - run: |
+          cd jobCompass
+          touch .env
+          echo VITE_apiKey=${{ secrets.VITE_apiKey }} > .env
+          echo VITE_storageBucket=${{ secrets.VITE_storageBucket }} > .env
+          echo VITE_messagingSenderId=${{ secrets.VITE_messagingSenderId }} > .env
+          echo VITE_appId=${{ secrets.VITE_appId}} > .env
+          echo VITE_measurementId=${{ secrets.VITE_measurementId }} > .env
+          npm install
+          npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
