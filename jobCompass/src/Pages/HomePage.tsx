@@ -1,6 +1,7 @@
 import bigLogo from '../assets/Vector.png';
 import Button from '../Utilities/Button';
 import Google from '../Components/Google';
+
 // type eventType = {
 //   target: HTMLElement,
 //   preventDefault: () => void,
@@ -12,6 +13,7 @@ function HomePage() {
   //   console.log("button clicked!", e.target.innerHTML)
   // }
 
+
   return (
     <div className="relative top-30 p-5 mx-auto">
       <div className="flex flex-col justify-center">
@@ -20,8 +22,10 @@ function HomePage() {
         <a href="/signup">
           <Button type="dark" class="w-full" text="Sign Up"/>
         </a>
+        <a href="/login">
+          <Button type="light" class="w-full" text="Log in"/>
+        </a>
 
-        <Button type="light" class="" text="Log in"/>
       </div>
       <Google />
 
