@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           cd jobCompass
+          touch .env
           echo VITE_apiKey=${{ secrets.VITE_APIKEY }} >> .env
           echo VITE_appId=${{ secrets.VITE_APPID }} >> .env
           echo VITE_storageBucket=${{ secrets.VITE_STORAGEBUCKET }} >> .env
