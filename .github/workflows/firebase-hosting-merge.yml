@@ -13,14 +13,14 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           cd jobCompass
-          touch .env
-          echo VITE_apiKey=${{ secrets.VITE_apiKey }} > .env
-          echo VITE_storageBucket=${{ secrets.VITE_storageBucket }} > .env
-          echo VITE_messagingSenderId=${{ secrets.VITE_messagingSenderId }} > .env
-          echo VITE_appId=${{ secrets.VITE_appId}} > .env
-          echo VITE_measurementId=${{ secrets.VITE_measurementId }} > .env
           npm install
-          npm run build
+          vite build
+          env:
+            VITE_apiKey: ${{ secrets.VITE_apiKey }}
+            VITE_storageBucket:${{ secrets.VITE_storageBucket }}
+            VITE_messagingSenderId: ${{ secrets.VITE_messagingSenderId }}
+            VITE_appId: ${{ secrets.VITE_appId}}
+            VITE_measurementId: ${{ secrets.VITE_measurementId }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
