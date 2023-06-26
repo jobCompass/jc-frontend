@@ -12,7 +12,7 @@ jobs:
       - run: |
           cd jobCompass
           touch .env
-          env: echo ${{ secrets.VITE_ENV }} >> .env
+          echo ${{ secrets.VITE_ENV }} >> .env
           npm install
           npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
