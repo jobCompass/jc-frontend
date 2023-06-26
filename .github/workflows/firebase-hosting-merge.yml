@@ -12,12 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          echo "$ENV_DEVELOPMENT" > .env.development
+          touch .env
+          echo VITE_apiKey=${{ secrets.VITE_apiKey }} > .env
+          echo VITE_storageBucket=${{ secrets.VITE_storageBucket }} > .env
+          echo VITE_messagingSenderId=${{ secrets.VITE_messagingSenderId }} > .env
+          echo VITE_appId=${{ secrets.VITE_appId}} > .env
+          echo VITE_measurementId=${{ secrets.VITE_measurementId }} > .env
           cd jobCompass
           npm install
           npm run build
-          env:
-            ENV_DEVELOPMENT: {{SECRETS.ENV_DEVELOPMENT
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
