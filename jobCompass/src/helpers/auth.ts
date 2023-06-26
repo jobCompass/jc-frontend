@@ -9,31 +9,30 @@ import
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
     signOut,
+    getAdditionalUserInfo,
   } from "firebase/auth";
 import {collection, addDoc } from "firebase/firestore";
 import axios from "axios";
 
-// const server = 'https://app-6lov3rzemq-uc.a.run.app';
-const server = 'http://127.0.0.1:5001/jobcampass-server/us-central1/app'
+const server = 'https://app-6lov3rzemq-uc.a.run.app';
+// const server = 'http://127.0.0.1:5001/jobcampass-server/us-central1/app'
 
 const googleProvider = new GoogleAuthProvider();
-const signInWithGoogle = async () => {
-  try {
-    const res = await signInWithPopup(auth, googleProvider);
-    const user = res.user;
-    console.log('user',user);
-    const check = await axios.post(`${server}/login/${user.uid}`, user)
-    if (check.status === 204) {
-      return {id: user.uid, name: user.displayName, email:user.email}
-    } else {
-      return 'exist';
-    }
-  } catch (err: any) {
-
-    if (err.code !=='auth/popup-closed-by-user') {
-      alert(err);
-    }
-  }
+const signInWithGoogle = () => {
+  return signInWithPopup(auth, googleProvider)
+    .then(res => {
+      const user = res.user;
+      return axios.post(`${server}/login/${user.uid}`, user)
+    })
+    .then(check => {
+      console.log('check', check);
+      return check.data;
+    })
+    .catch(err => {
+      if (err.code !=='auth/popup-closed-by-user'){
+        alert(err);
+      }
+    })
 };
 
 const logInWithEmailAndPassword = async (email:string, password:string) => {
