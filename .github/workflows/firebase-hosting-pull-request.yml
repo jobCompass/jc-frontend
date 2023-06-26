@@ -12,7 +12,11 @@ jobs:
       - run: |
           cd jobCompass
           touch .env
-          echo ${{ secrets.VITE_ENV }} >> .env
+          echo VITE_apiKey=${{ secrets.VITE_APIKEY }} >> .env
+          echo VITE_appId=${{ secrets.VITE_APPID }} >> .env
+          echo VITE_storageBucket=${{ secrets.VITE_STORAGEBUCKET }} >> .env
+          echo VITE_messagingSenderId=${{ secrets.VITE_MESSAGINGSENDERID }} >> .env
+          echo VITE_measurementId=${{ secrets.VITE_MEASUREMENTID }} >> .env
           npm install
           npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
