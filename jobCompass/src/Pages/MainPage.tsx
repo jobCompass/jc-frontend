@@ -1,10 +1,11 @@
-
+import { useParams } from "react-router-dom";
 
 // type eventType = {
 //   target: HTMLElement,
 //   preventDefault: () => void,
 // }
 function MainPage() {
+  const { userId } = useParams()
 
   // const buttonOnclick=(e:eventType) => {
   //   e.preventDefault();
@@ -14,7 +15,7 @@ function MainPage() {
 
   return (
     <div className="relative top-30 p-5 mx-auto">
-      This is logged in user's dashboard page
+      {userId}
 
     </div>
 

@@ -18,7 +18,5 @@ export default function Button (props: ButtonPropsType) {
     <button className={`${defaultStyle} ${props.class}`}>{props.text}</button>
   )
 
-
-
 }
 
