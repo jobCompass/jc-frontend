@@ -22,7 +22,6 @@ export default function SignUp({elem}: SignUpProps){
   return (
     <div className="min-h-screen w-screen bg-blue1">
       <Modal>
-
         <form className="px-8 pt-6 pb-8 mb-4">
           <div className="mb-4 text-left text-lg font-bold">{elem === 'login' ? "Log In" : "Sign up"}</div>
           <Input
@@ -37,7 +36,6 @@ export default function SignUp({elem}: SignUpProps){
             <Input height="mb-4" type="text" label="Full Name" id="full_name" placeHolder="Full Name" />
             <Input height="mb-4" type="text" label="Phone Number" id="phone" placeHolder="+1(123) 123-1230" />
           </>
-
           }
           <Input
             height="mb-6"

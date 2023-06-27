@@ -13,7 +13,7 @@ import
 import {collection, addDoc } from "firebase/firestore";
 import axios from "axios";
 
-const server = 'https://app-6lov3rzemq-uc.a.run.app';
+const server = import.meta.env.VITE_SERVER;
 // const server = 'http://127.0.0.1:5001/jobcampass-server/us-central1/app'
 
 const googleProvider = new GoogleAuthProvider();
