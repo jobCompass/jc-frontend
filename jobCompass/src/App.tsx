@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import HomePage from './Pages/HomePage.tsx';
 import SignUp from './Pages/SignUp.tsx';
 import MainPage from './Pages/MainPage.tsx';
+
 // import axios from 'axios';
 import './App.css'
 
@@ -22,7 +23,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp elem="signup" />} />
+        <Route path="/login" element={<SignUp elem="login" />} />
         <Route path="/:userId" element={<MainPage />} />
       </Routes>
     </BrowserRouter>
