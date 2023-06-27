@@ -6,6 +6,9 @@ type SignUpProps = {
   elem: string;
 }
 export default function SignUp({elem}: SignUpProps){
+  function reSetPassword() {
+    console.log("reset button clicked!")
+  }
   function handleSubmit () {
     if (elem === 'login') {
       console.log("it's login")
@@ -54,7 +57,7 @@ export default function SignUp({elem}: SignUpProps){
               <Button text="Back" type="light" class=""/>
             </a>
           </div>
-          <div className="align-baseline font-bold text-right text-sm text-blue-500 hover:text-blue-800" href="#">
+          <div className="align-baseline font-bold text-right text-sm text-blue-500 hover:text-blue-800" onClick={reSetPassword}>
               Forgot Password?
           </div>
         <Google />
