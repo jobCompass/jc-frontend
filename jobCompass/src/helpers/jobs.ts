@@ -1,19 +1,15 @@
 import axios from 'axios';
+import { JobType, Obj } from './propTypes';
 const server = import.meta.env.VITE_SERVER;
-import { Timestamp } from "firebase/firestore";
-type JobType = {
-  title: string,
-  company: string,
-  type: string,
-  location: string | null,
-  note: string | null,
-  status: string,
-  update:Timestamp,
-  url:string,
-  timeline:Map<string, Timestamp>
-};
+
+
 const filterJobs = (arr:Array<JobType>) => {
   console.log('filterjobs', arr);
+  const result: Obj = {'saved':[], 'applied':[], 'reject':[], 'phone':[], 'tech':[], 'fianl':[], 'offered':[]};
+  arr.forEach((job:JobType) => {
+    result[job.status].push(job);
+  });
+  return result;
 }
 
 const getUserJob = (userId:string) => {
