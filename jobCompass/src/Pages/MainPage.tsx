@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {getUserJob} from "../helpers/jobs";
 import JobList from "../Components/JobList";
-import { JobListType } from "../helpers/propTypes";
+// import { JobListType } from "../helpers/propTypes";
 import { Obj } from "../helpers/propTypes";
 // type eventType = {
 //   target: HTMLElement,

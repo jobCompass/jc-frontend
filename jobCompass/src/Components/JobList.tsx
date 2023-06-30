@@ -1,14 +1,13 @@
-import { Timestamp } from "firebase/firestore";
-import {useState} from "react";
+// import { Timestamp } from "firebase/firestore";
+// import {useState} from "react";
 import Button from "../Utilities/Button";
-import { JobType, JobListType } from "../helpers/propTypes";
-
+import { TimeType, JobType, JobListType } from "../helpers/propTypes";
+import Card from "../Utilities/Card";
+import * as dateFns from 'date-fns';
 type JobListProps = JobListType & {key:number};
-function convertTime (timestamp: {_seconds:number; _nanoseconds:number}) {1
+function convertTime (timestamp: TimeType) {1
   const temp:number = (timestamp._seconds + timestamp._nanoseconds * 0.00000001) * 1000;
-  const current = new Date().getTime();
-  console.log((current - temp)/1000);
-  return (current - temp)/1000;
+  return dateFns.formatDistanceToNow(temp);
 }
 export default function JobList ({status, jobs}:JobListProps) {
 
@@ -32,15 +31,8 @@ export default function JobList ({status, jobs}:JobListProps) {
         :
         <ul>
           {jobs.map((job: JobType, j:number) => {
-            const time1 = convertTime(job.timeline[status]);
-            console.log('time convered:',time1);
-            return (
-              <li key={j}>
-                <div>{job.title}</div>
-                <div>{job.company}</div>
-                <div>{time1} seconds ago</div>
-              </li>
-            )
+            job.update = convertTime(job.timeline[status])
+            return <Card key={j} job={job} />
           })}
         </ul>
         }

@@ -1,4 +1,8 @@
-import { Timestamp } from "firebase/firestore";
+export type TimeType = {
+  _seconds: number,
+  _nanoseconds: number,
+}
+
 export type JobType = {
   title: string,
   company: string,
@@ -6,9 +10,9 @@ export type JobType = {
   location: string | null,
   note: string | null,
   status: string,
-  update:Timestamp,
+  update: string,
   url:string,
-  timeline:Map<string, Timestamp>
+  timeline: {[propKey: string]: TimeType}
 };
 
 export type JobListType = {
