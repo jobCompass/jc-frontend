@@ -13,12 +13,9 @@ export default function Button (props: ButtonPropsType) {
   } else if (props.type === 'dark') {
     defaultStyle += " bg-blue3 text-white hover:opacity-80 active:opacity-100";
   }
-  console.log('props.class:', props.class);
   return (
     <button className={`${defaultStyle} ${props.class}`}>{props.text}</button>
   )
-
-
 
 }
 

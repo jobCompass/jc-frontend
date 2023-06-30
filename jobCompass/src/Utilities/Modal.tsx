@@ -1,6 +1,7 @@
 
 
 import logo from '../assets/logo.svg';
+
 export default function Modal({
   children,
 }: {
@@ -9,11 +10,12 @@ export default function Modal({
   return (
     <div className="relative top-20 mx-auto p-5 border-2 w-96 shadow-lg rounded-md bg-white">
       <div className="mt-3 text-center">
-        <div
+        <a
           className="mx-auto flex items-center justify-center h-12 w-12 rounded-full mb-5"
+          href="/"
         >
-          <img src={logo} alt="logo" />
-        </div>
+          <img src={logo} alt="logo"  />
+        </a>
         {children}
       </div>
     </div>

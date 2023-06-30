@@ -12,7 +12,7 @@ type InputProps = {
 export default function Input (props:InputProps) {
   return (
     <div className={props.height}>
-      <label className={`block text-gray-700 text-sm font-bold mb-2 ${props.labelClass}`} htmlFor={props.label.toLowerCase()}>
+      <label className={`block text-gray-700 text-sm text-left mb-2 ${props.labelClass}`} htmlFor={props.label.toLowerCase()}>
         {props.label}
       </label>
       <input

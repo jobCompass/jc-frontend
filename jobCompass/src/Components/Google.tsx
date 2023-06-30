@@ -22,7 +22,6 @@ export default function Google () {
        onClick={signIn}
        alt="google"
       />
-
     </>
   )
 }
