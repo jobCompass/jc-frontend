@@ -1,5 +1,5 @@
 
-export default function Break({text}: {text:string}) {
+export default function Break({text}: {text:string | null}) {
   return (
     <div className="relative flex py-5 items-center">
       <div className="flex-grow border-t border-gray-400" />

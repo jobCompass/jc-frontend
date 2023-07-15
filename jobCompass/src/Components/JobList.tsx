@@ -4,13 +4,18 @@ import Button from "../Utilities/Button";
 import { TimeType, JobType, JobListType } from "../helpers/propTypes";
 import Card from "../Utilities/Card";
 import * as dateFns from 'date-fns';
-type JobListProps = JobListType & {key:number};
+
+type JobListProps = JobListType & {key:number, open: boolean, setOpen:(open:boolean)=>void};
 function convertTime (timestamp: TimeType) {1
   const temp:number = (timestamp._seconds + timestamp._nanoseconds * 0.00000001) * 1000;
   return dateFns.formatDistanceToNow(temp);
 }
-export default function JobList ({status, jobs}:JobListProps) {
+export default function JobList ({status, jobs, setOpen}:JobListProps) {
 
+  const addJob = ()=> {
+    console.log('pop up add job window')
+    setOpen(true)
+  }
   return (
     <div
      className="w-72 h-screen border snap-x"
@@ -23,6 +28,7 @@ export default function JobList ({status, jobs}:JobListProps) {
         class="w-full border-1 border-gray-100 hover:ring-1 hover:bg-white hover:ring-gray-200 focus:ring-1 focus:ring-blue4"
         text="+"
         type="light"
+        onClick={addJob}
       />
       </div>
       <div>
