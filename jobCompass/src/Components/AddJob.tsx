@@ -2,7 +2,7 @@ import Input from "../Utilities/Input"
 import Modal from "../Utilities/Modal"
 import Break from "../Utilities/Breakline"
 import Button from "../Utilities/Button"
-export default function AddJob ({setOpen} : {setOpen: ()=>void}) {
+export default function AddJob ({setOpen} : {setOpen: (open:boolean)=>void}) {
   return (
 
     <Modal>

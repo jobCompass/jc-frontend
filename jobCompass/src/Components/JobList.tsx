@@ -4,13 +4,13 @@ import Button from "../Utilities/Button";
 import { TimeType, JobType, JobListType } from "../helpers/propTypes";
 import Card from "../Utilities/Card";
 import * as dateFns from 'date-fns';
-import {useState} from 'react';
+
 type JobListProps = JobListType & {key:number, open: boolean, setOpen:(open:boolean)=>void};
 function convertTime (timestamp: TimeType) {1
   const temp:number = (timestamp._seconds + timestamp._nanoseconds * 0.00000001) * 1000;
   return dateFns.formatDistanceToNow(temp);
 }
-export default function JobList ({status, jobs, open, setOpen}:JobListProps) {
+export default function JobList ({status, jobs, setOpen}:JobListProps) {
 
   const addJob = ()=> {
     console.log('pop up add job window')
