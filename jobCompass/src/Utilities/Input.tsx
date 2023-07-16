@@ -1,26 +1,47 @@
 
-type InputProps = {
-  height: string,
-  type: string,
-  labelClass?: string | null,
-  label: string,
-  inputClass?: string,
-  id: string,
-  placeHolder: string,
-}
+// type InputProps = {
+//   height: string,
+//   type: string,
+//   labelClass?: string | null,
+//   label: string,
+//   inputClass?: string,
+//   id: string,
+//   require?: boolean
+//   placeHolder?: string,
+//   children?: React.ReactNode,
+// }
 
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+ height:string,
+ label?:string,
+ labelClass?:string,
+ inputClass?:string,
+ children?: React.ReactNode,
+ erro?: undefined | object,
+ register?:any
+}
 export default function Input (props:InputProps) {
+  const label = props.id ? props.id[0].toUpperCase() + props.id.slice(1).split('_').join(' ') : null
   return (
     <div className={props.height}>
-      <label className={`block text-gray-700 text-sm text-left mb-2 ${props.labelClass}`} htmlFor={props.label.toLowerCase()}>
-        {props.label}
+      <label htmlFor={props.id} className={`block text-gray-700 text-sm text-left mb-2 ${props.labelClass}`} >
+        {props.label || label}
       </label>
+
+      {props.type =='select' ? props.children :
       <input
-        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${props.inputClass}`}
-        id={props.id}
-        type={props.type}
-        placeholder={props.placeHolder}
-      />
-</div>
+      className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${props.inputClass}`}
+      id={props.id}
+      type={props.type}
+      aria-invalid={props.erro}
+      placeholder={props.placeholder}
+      {...props.register(props.id, {
+        required: true }
+      )}
+    />
+      }
+      {props.erro && <div className="text-right text-xs text-red-500">{`${props.label || label} is required`}</div>}
+    </div>
   )
 }
+

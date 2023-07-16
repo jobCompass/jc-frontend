@@ -5,6 +5,8 @@ import JobList from "../Components/JobList";
 import AddJob from "../Components/AddJob";
 // import { JobListType } from "../helpers/propTypes";
 import { Obj } from "../helpers/propTypes";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { open, changeStatus } from "../features/jobs/jobSlice";
 // type eventType = {
 //   target: HTMLElement,
 //   preventDefault: () => void,
@@ -14,8 +16,11 @@ const status = ['saved', 'applied', 'reject', 'phone interview', 'tech interview
 function MainPage() {
   const { userId } = useParams()
   const [jobs, setJobs] = useState<Obj>({});
-  const [open, setOpen] = useState(false)
+  const openStatus = useAppSelector((state) => state.jobs.open)
+
+  const dispatch = useAppDispatch()
   //send request to get jobs
+
   useEffect(() => {
     if (userId !== undefined){
       console.log('in ', userId);
@@ -25,15 +30,14 @@ function MainPage() {
           setJobs(result);
         })
     }
-
   }, [userId])
 
   return (
     <div className="flex flex-grow">
-      {open && <div className={hidden}><AddJob setOpen={setOpen}/></div>}
+      {openStatus && <div className={hidden}><AddJob status={status} toggleOpen={() => dispatch(open())}/></div>}
       <div className="relative flex flex-row top-30 p-5 mx-auto snap-y">
         {status.map((type, i) =>
-          <JobList key={i} status={type} jobs={jobs[type]} open={open} setOpen={setOpen}/>
+          <JobList key={i} status={type} jobs={jobs[type]} toggleOpen={() => dispatch(open())} saveType = {() => dispatch(changeStatus(type))}/>
         )}
       </div>
     </div>
