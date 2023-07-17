@@ -1,4 +1,4 @@
-// import { Timestamp } from "firebase/firestore";
+
 // import {useState} from "react";
 import Button from "../Utilities/Button";
 import { TimeType, JobType, JobListType } from "../helpers/propTypes";
@@ -6,7 +6,8 @@ import Card from "../Utilities/Card";
 import * as dateFns from 'date-fns';
 
 type JobListProps = JobListType & {key:number, toggleOpen:()=>void, saveType: ()=>void};
-function convertTime (timestamp: TimeType) {1
+function convertTime (timestamp: TimeType) {
+  console.log('timestamp in convert----: ', timestamp)
   const temp:number = (timestamp._seconds + timestamp._nanoseconds * 0.00000001) * 1000;
   return dateFns.formatDistanceToNow(temp);
 }

@@ -6,7 +6,7 @@ interface JobState {
   open: boolean
 }
 
-const initalState: JobState = { clickStatus:'', open:false, }
+const initialState: JobState = { clickStatus:'', open:false, }
 
 export const jobSlice = createSlice({
   name: 'addjob',
@@ -19,7 +19,7 @@ export const jobSlice = createSlice({
       state.clickStatus = action.payload.toUpperCase()
     },
   },
-  initialState: initalState
+  initialState,
 })
 
 export const {open, changeStatus} = jobSlice.actions

@@ -4,8 +4,8 @@ import Break from "../Utilities/Breakline"
 import Button from "../Utilities/Button"
 import { useAppSelector } from "../store/hooks";
 import { useForm, SubmitHandler } from 'react-hook-form';
-
-
+import { addJob } from "../helpers/jobs";
+import { useParams } from "react-router-dom";
 type FormValues = {
   company: string;
   job_title: string;
@@ -13,10 +13,18 @@ type FormValues = {
 }
 export default function AddJob ({status, toggleOpen} : {status:Array<string>,toggleOpen: () => void}) {
   const currentList= useAppSelector((state) => state.jobs.clickStatus)
+  // const userId = useAppSelector((state) => state.users.id)
+  const {userId} = useParams()
+  console.log('id', userId)
   const {register, handleSubmit, formState: {errors}}= useForm({defaultValues: {company:'', job_title:'', list:currentList}})
   const onSubmit: SubmitHandler<FormValues>=(data) => {
-    console.log(data + 'is going to add!')
     // axio to the server,
+    data.list = data.list.toLowerCase()
+    if(userId) {
+      addJob(userId, data)
+
+    }
+
     // add to the current list
     // then close the modal
     toggleOpen()
@@ -54,10 +62,12 @@ export default function AddJob ({status, toggleOpen} : {status:Array<string>,tog
         </Input>
         <Break text={null}/>
         <Button text={"Discard"} type="light" onClick={toggleOpen}/>
-        <input type="submit"></input>
-        {/* <input type="submit"><Button text={"Save"} type="dark"/></input> */}
-
-
+        {/* <Input height="mb-2" type="submit" value="Save" /> */}
+        <input
+          className="mx-2 bg-blue3 text-white hover:opacity-80 active:opacity-100 shadow-sx border rounded-md px-4 py-2 text-m my-2 focus:outline-none focus:ring-4"
+          type="submit"
+          value="Save"
+        />
       </form>
 
 
