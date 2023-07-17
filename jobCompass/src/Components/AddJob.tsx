@@ -2,24 +2,44 @@ import Input from "../Utilities/Input"
 import Modal from "../Utilities/Modal"
 import Break from "../Utilities/Breakline"
 import Button from "../Utilities/Button"
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { useForm, SubmitHandler } from 'react-hook-form';
-
-
+import { addJob } from "../helpers/jobs";
+import { addOneJob } from "../features/jobs/jobSlice";
+import { useParams } from "react-router-dom";
+// import { JobType } from "../helpers/propTypes";
 type FormValues = {
   company: string;
   job_title: string;
   list: string;
 }
 export default function AddJob ({status, toggleOpen} : {status:Array<string>,toggleOpen: () => void}) {
+
+  const jobs = useAppSelector((state) => state.jobs.joblist)
+  const dispatch = useAppDispatch()
   const currentList= useAppSelector((state) => state.jobs.clickStatus)
+  // const userId = useAppSelector((state) => state.users.id)
+  console.log('ooooutside!!!,',jobs)
+  const {userId} = useParams()
+  console.log('id', userId)
   const {register, handleSubmit, formState: {errors}}= useForm({defaultValues: {company:'', job_title:'', list:currentList}})
   const onSubmit: SubmitHandler<FormValues>=(data) => {
-    console.log(data + 'is going to add!')
     // axio to the server,
-    // add to the current list
-    // then close the modal
-    toggleOpen()
+    data.list = data.list.toLowerCase()
+    if (userId) {
+      return addJob(userId, data)
+      .then(newJob =>{
+        if (newJob !== undefined) {
+          dispatch(addOneJob(newJob))
+        }
+      })
+      .then(() => toggleOpen())
+      .catch(err => console.log('add one job err: ', err))
+    } else {
+      alert('not login')
+    }
+
+
   }
 
 
@@ -54,10 +74,12 @@ export default function AddJob ({status, toggleOpen} : {status:Array<string>,tog
         </Input>
         <Break text={null}/>
         <Button text={"Discard"} type="light" onClick={toggleOpen}/>
-        <input type="submit"></input>
-        {/* <input type="submit"><Button text={"Save"} type="dark"/></input> */}
-
-
+        {/* <Input height="mb-2" type="submit" value="Save" /> */}
+        <input
+          className="mx-2 bg-blue3 text-white hover:opacity-80 active:opacity-100 shadow-sx border rounded-md px-4 py-2 text-m my-2 focus:outline-none focus:ring-4"
+          type="submit"
+          value="Save"
+        />
       </form>
 
 
