@@ -78,12 +78,6 @@ export default function SignUp({elem}: SignUpProps){
               type="submit"
               value={elem === 'signup' ? "Sign Up" : "Log In"}
             />
-            {/* <Button
-              type="dark"
-              class="w-full"
-              text={elem === 'signup' ? "Sign Up" : "Log In"}
-              onClick={handleSubmit}
-            /> */}
 
             {elem === 'login'?
             <div className="align-baseline cursor-pointer font-bold text-right text-sm text-blue-500 hover:text-blue-800" onClick={reSetPassword}>

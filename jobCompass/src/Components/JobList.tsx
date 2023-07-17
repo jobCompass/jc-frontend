@@ -1,17 +1,13 @@
 
-// import {useState} from "react";
+
 import Button from "../Utilities/Button";
-import { TimeType, JobType, JobListType } from "../helpers/propTypes";
+import { JobType, JobListType } from "../helpers/propTypes";
 import Card from "../Utilities/Card";
-import * as dateFns from 'date-fns';
+import convertTime from "../helpers/convertTime";
 
 type JobListProps = JobListType & {key:number, toggleOpen:()=>void, saveType: ()=>void};
-function convertTime (timestamp: TimeType) {
-  console.log('timestamp in convert----: ', timestamp)
-  const temp:number = (timestamp._seconds + timestamp._nanoseconds * 0.00000001) * 1000;
-  return dateFns.formatDistanceToNow(temp);
-}
-export default function JobList ({status, jobs, toggleOpen, saveType}:JobListProps) {
+
+export default function JobList ({status,  jobs,toggleOpen, saveType}:JobListProps) {
 
   return (
     <div
@@ -37,7 +33,7 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
         :
         <ul>
           {jobs.map((job: JobType, j:number) => {
-            job.update = convertTime(job.timeline[status])
+            job = {...job, update: convertTime(job.timeline[status])}
             return <Card key={j} job={job} />
           })}
         </ul>

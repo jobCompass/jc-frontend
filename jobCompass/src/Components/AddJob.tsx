@@ -2,32 +2,44 @@ import Input from "../Utilities/Input"
 import Modal from "../Utilities/Modal"
 import Break from "../Utilities/Breakline"
 import Button from "../Utilities/Button"
-import { useAppSelector } from "../store/hooks";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { addJob } from "../helpers/jobs";
+import { addOneJob } from "../features/jobs/jobSlice";
 import { useParams } from "react-router-dom";
+// import { JobType } from "../helpers/propTypes";
 type FormValues = {
   company: string;
   job_title: string;
   list: string;
 }
 export default function AddJob ({status, toggleOpen} : {status:Array<string>,toggleOpen: () => void}) {
+
+  const jobs = useAppSelector((state) => state.jobs.joblist)
+  const dispatch = useAppDispatch()
   const currentList= useAppSelector((state) => state.jobs.clickStatus)
   // const userId = useAppSelector((state) => state.users.id)
+  console.log('ooooutside!!!,',jobs)
   const {userId} = useParams()
   console.log('id', userId)
   const {register, handleSubmit, formState: {errors}}= useForm({defaultValues: {company:'', job_title:'', list:currentList}})
   const onSubmit: SubmitHandler<FormValues>=(data) => {
     // axio to the server,
     data.list = data.list.toLowerCase()
-    if(userId) {
-      addJob(userId, data)
-
+    if (userId) {
+      return addJob(userId, data)
+      .then(newJob =>{
+        if (newJob !== undefined) {
+          dispatch(addOneJob(newJob))
+        }
+      })
+      .then(() => toggleOpen())
+      .catch(err => console.log('add one job err: ', err))
+    } else {
+      alert('not login')
     }
 
-    // add to the current list
-    // then close the modal
-    toggleOpen()
+
   }
 
 
