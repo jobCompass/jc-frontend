@@ -28,12 +28,13 @@ export default function Input (props:InputProps) {
         {props.label || label}
       </label>
 
-      {props.type =='select' ? props.children :
+      {props.type === 'select' ? props.children :
       <input
       className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${props.inputClass}`}
       id={props.id}
       type={props.type}
       aria-invalid={props.erro}
+      defaultValue={props.defaultValue}
       placeholder={props.placeholder}
       {...props.register(props.id, {
         required: true }

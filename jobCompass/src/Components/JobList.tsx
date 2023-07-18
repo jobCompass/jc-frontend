@@ -2,7 +2,7 @@
 
 import Button from "../Utilities/Button";
 import { JobType, JobListType } from "../helpers/propTypes";
-import Card from "../Utilities/Card";
+import Card from "./Card";
 import convertTime from "../helpers/convertTime";
 
 type JobListProps = JobListType & {key:number, toggleOpen:()=>void, saveType: ()=>void};
