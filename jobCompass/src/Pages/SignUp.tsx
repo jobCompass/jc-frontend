@@ -5,6 +5,7 @@ import Input from '../Utilities/Input';
 import { useNavigate } from 'react-router-dom';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
+import Logo from '../Utilities/Logo';
 type SignUpProps = {
   elem: string;
 }
@@ -36,8 +37,9 @@ export default function SignUp({elem}: SignUpProps){
   }
   console.log(errors.email)
   return (
-    <div className="min-h-screen w-screen bg-blue1">
+    <div className="relative inset-0 min-h-screen w-screen bg-blue1 ">
       <Modal>
+        <Logo />
         <form className="px-8 pt-6 pb-8 mb-4"  onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4 text-left text-lg font-bold">{elem === 'login' ? "Log In" : "Sign up"}</div>
           <Input
