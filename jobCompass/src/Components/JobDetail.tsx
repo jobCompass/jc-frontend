@@ -59,12 +59,10 @@ export default function JobDetail ({job}:{job:JobType}) {
                </div>
              </div>
                <div className="text-xs self-center font-thin">
-                 {convertTime(job.timeline["applied"])}
+                 {convertTime(job.timeline[active])}
                </div>
            </li>
           )}
-
-          {job.timeline["saved"] && <li>Saved Job {convertTime(job.timeline["saved"])} ago</li>}
         </div>
       </div>
     </Modal>
