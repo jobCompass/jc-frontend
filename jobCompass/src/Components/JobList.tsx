@@ -21,6 +21,7 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
   }
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
+
     const job_id = e.dataTransfer.getData("id");
     const status = e.dataTransfer.getData("list")
     console.log('i in drop   d', e.currentTarget.id)
@@ -32,6 +33,7 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
 
         updateJob(userId, target, joblist[status][index])
           .then((updated) => {
+            setIsDrag(false)
             if (updated !== undefined) {
               dispatch(dragJob({index, status, target, updated}))
             }
