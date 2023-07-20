@@ -5,6 +5,7 @@ export type TimeType = {
 export type statusName = 'saved' | 'applied' | 'reject' | 'phone interview'| 'tech interview'| 'final interview'| 'offered'
 
 export type JobType = {
+  id?: string,
   title: string,
   company: string,
   type?: string,

@@ -30,6 +30,7 @@ function MainPage() {
       console.log('in ', userId);
       getUserJob(userId)
         .then(result => {
+          console.log('list!!!', result);
           dispatch(getJobList(result))
         })
     }
@@ -45,8 +46,11 @@ function MainPage() {
       <div className={hidden}><JobDetail job={curJob}/></div>
       }
       <div className="relative flex flex-row top-30 p-5 mx-auto snap-y">
-        {status.map((type, i) =>
-          <JobList key={i} status={type} jobs={jobs[type]} toggleOpen={() => dispatch(open())} saveType = {() => dispatch(changeStatus(type))}/>
+        {status.map((type, i) => {
+          type = type.split(" ")[0] || type
+          return <JobList key={i} status={type} jobs={jobs[type] || []} toggleOpen={() => dispatch(open())} saveType = {() => dispatch(changeStatus(type))}/>
+        }
+
         )}
       </div>
     </div>

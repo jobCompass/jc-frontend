@@ -2,8 +2,8 @@ import axios from 'axios';
 import { JobType, Obj } from './propTypes';
 import { Timestamp } from "firebase/firestore";
 
-
 const server = import.meta.env.VITE_SERVER;
+
 type FormValues = {
   company: string;
   job_title: string;
@@ -11,7 +11,7 @@ type FormValues = {
 }
 
 const filterJobs = (arr:Array<JobType>) => {
-  const result: Obj = {'saved':[], 'applied':[], 'reject':[], 'phone':[], 'tech':[], 'fianl':[], 'offered':[]};
+  const result: Obj = {'saved':[], 'applied':[], 'reject':[], 'phone':[], 'tech':[], 'final':[], 'offered':[]};
   arr.forEach((job:JobType) => {result[job.status].push(job)});
   return result;
 }
@@ -29,7 +29,7 @@ const getUserJob = (userId:string) => {
     .catch(err => console.error(err));
 }
 
-const addJob = async(userId:string, jobData: FormValues):Promise<JobType|undefined>=> {
+const addJob = async(userId:string, jobData: FormValues)=> {
   // console.log('in job functions:',userId, jobData)
   const current_time = Timestamp.fromDate(new Date())
   const newJob = {company:jobData.company, title: jobData.job_title, status: jobData.list, timeline:{[jobData.list]: {'_seconds': current_time.seconds, '_nanoseconds':current_time.nanoseconds}}}
@@ -37,11 +37,25 @@ const addJob = async(userId:string, jobData: FormValues):Promise<JobType|undefin
   try{
     const res = await axios.post(`${server}/${userId}/addjob`, newJob)
     if (res.status === 201) {
-      return newJob
+      return res.data
     }
   } catch(error) {
     console.error('addjob server error:', error)
   }
 }
 
-export {getUserJob, addJob}
+const updateJob = async(userId: string, target: string, job: JobType) => {
+  const current_time = Timestamp.fromDate(new Date());
+  const copy = {...job, status: target, timeline: {...job.timeline, [target]: {'_seconds': current_time.seconds, '_nanoseconds':current_time.nanoseconds}}};
+  try {
+    const res = await axios.put(`${server}/${userId}/${job.id}/updatejob`, copy);
+    if (res.status == 200) {
+      console.log('copy', copy)
+      return copy;
+    }
+  } catch(error) {
+    console.error('update job server error: ', error);
+  }
+}
+
+export {getUserJob, addJob, updateJob}

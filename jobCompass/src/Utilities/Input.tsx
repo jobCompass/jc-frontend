@@ -1,16 +1,4 @@
 
-// type InputProps = {
-//   height: string,
-//   type: string,
-//   labelClass?: string | null,
-//   label: string,
-//   inputClass?: string,
-//   id: string,
-//   require?: boolean
-//   placeHolder?: string,
-//   children?: React.ReactNode,
-// }
-
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
  height:string,
  label?:string,
