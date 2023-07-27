@@ -25,7 +25,7 @@ export default function Input (props:InputProps) {
       defaultValue={props.defaultValue}
       placeholder={props.placeholder}
       {...props.register(props.id, {
-        required: true }
+        required: props.required}
       )}
     />
       }

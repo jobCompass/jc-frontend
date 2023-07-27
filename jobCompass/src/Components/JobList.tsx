@@ -21,17 +21,14 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
   }
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-
     const job_id = e.dataTransfer.getData("id");
     const status = e.dataTransfer.getData("list")
-    console.log('i in drop   d', e.currentTarget.id)
     const index = joblist[status].findIndex(x => x.id == job_id)
     const target = e.currentTarget.id.split(" ")[0]
     if (target != status) {
       if (index >= 0 && userId){
         // send put request to server update the status
-
-        updateJob(userId, target, joblist[status][index])
+        updateJob(userId, joblist[status][index], target)
           .then((updated) => {
             setIsDrag(false)
             if (updated !== undefined) {
@@ -41,7 +38,7 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
           .catch((error) => console.log('err in handldrop: ', error))
     }
   }}
-  console.log('status: ', status, jobs)
+
   return (
     <div
      className={`w-72 h-screen border snap-x ${isDrage ? "border-black" : ""}`}

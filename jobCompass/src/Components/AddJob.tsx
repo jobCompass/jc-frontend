@@ -38,8 +38,6 @@ export default function AddJob ({status, toggleOpen} : {status:Array<string>,tog
     } else {
       alert('not login')
     }
-
-
   }
 
 
@@ -55,6 +53,7 @@ export default function AddJob ({status, toggleOpen} : {status:Array<string>,tog
           type="text"
           id='company'
           placeholder="company"
+          required={true}
           register={register}
           erro = {errors.company}
         />
@@ -64,6 +63,7 @@ export default function AddJob ({status, toggleOpen} : {status:Array<string>,tog
           type="text"
           id="job_title"
           placeholder="Job Title"
+          required={true}
           register={register}
           erro = {errors.job_title}
         />
