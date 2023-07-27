@@ -9,6 +9,7 @@ export type JobType = {
   title: string,
   company: string,
   type?: string,
+  salary?:string,
   location?: string,
   note?: string | null,
   status: string,

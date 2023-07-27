@@ -14,12 +14,12 @@ export const detailSlice = createSlice({
   initialState,
   reducers: {
     toggle: (state) => {
-      console.log('toggle detail: ', state.open)
       state.open = !state.open
     },
     setJob: (state, action:PayloadAction<JobType>) => {
       state.job = action.payload
-    }
+    },
+
   }
 })
 

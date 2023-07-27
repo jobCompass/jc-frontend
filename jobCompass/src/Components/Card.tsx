@@ -9,7 +9,6 @@ const focus ="focus:outline-none focus:ring-4";
 export default function Card ({job}:{job:JobType}) {
   const dispatch = useAppDispatch()
   const handleDragStart = (e: React.DragEvent<HTMLLIElement>) => {
-    console.log(e.currentTarget.id)
     e.dataTransfer.clearData()
     e.dataTransfer.setData('id', e.currentTarget.id)
     e.dataTransfer.setData('list', job.status)

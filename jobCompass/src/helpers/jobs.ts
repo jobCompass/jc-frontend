@@ -44,9 +44,9 @@ const addJob = async(userId:string, jobData: FormValues)=> {
   }
 }
 
-const updateJob = async(userId: string, target: string, job: JobType) => {
+const updateJob = async(userId: string, job: JobType, target?: string ) => {
   const current_time = Timestamp.fromDate(new Date());
-  const copy = {...job, status: target, timeline: {...job.timeline, [target]: {'_seconds': current_time.seconds, '_nanoseconds':current_time.nanoseconds}}};
+  const copy = !target ? job : {...job, status: target, timeline: {...job.timeline, [target]: {'_seconds': current_time.seconds, '_nanoseconds':current_time.nanoseconds}}};
   try {
     const res = await axios.put(`${server}/${userId}/${job.id}/updatejob`, copy);
     if (res.status == 200) {

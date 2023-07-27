@@ -5,14 +5,8 @@ import JobList from "../Components/JobList";
 import AddJob from "../Components/AddJob";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { open, changeStatus, getJobList} from "../features/jobs/jobSlice";
-
 import JobDetail from "../Components/JobDetail";
 
-
-// type eventType = {
-//   target: HTMLElement,
-//   preventDefault: () => void,
-// }
 const hidden = "fixed inset-0 z-50 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
 const status = ['saved', 'applied', 'reject', 'phone interview', 'tech interview', 'final interview', 'offered']
 
