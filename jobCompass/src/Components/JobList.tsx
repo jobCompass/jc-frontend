@@ -7,6 +7,7 @@ import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { dragJob } from "../features/jobs/jobSlice";
 import { updateJob } from "../helpers/jobs";
 import { useParams } from "react-router-dom";
+
 type JobListProps = JobListType & {key:number, toggleOpen:()=>void, saveType: ()=>void};
 
 export default function JobList ({status, jobs, toggleOpen, saveType}:JobListProps) {
@@ -15,7 +16,6 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
   const [isDrage, setIsDrag] = useState(false)
   const dispatch = useAppDispatch()
   const handleDragOver = (e: React.DragEvent) => {
-    console.log('drag overrrr')
     e.preventDefault();
     setIsDrag(true)
   }
@@ -53,7 +53,7 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
       <Button
         class="w-full border-1 border-gray-100 hover:ring-1 hover:bg-white hover:ring-gray-200 focus:ring-1 focus:ring-blue4"
         text="+"
-        type="light"
+        color="light"
         onClick={() => {
           toggleOpen()
           saveType()
@@ -61,10 +61,11 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
       />
       </div>
       <div>
+
         <ul>
           {jobs.map((job: JobType, j:number) => {
             job = {...job, update: convertTime(job.timeline[status])}
-            return <Card key={j} job={job} />
+            return <Card key={j} index={j} job={job} />
           })}
         </ul>
       </div>

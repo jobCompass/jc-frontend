@@ -15,11 +15,9 @@ type FormValues = {
 }
 export default function AddJob ({status, toggleOpen} : {status:Array<string>,toggleOpen: () => void}) {
 
-  const jobs = useAppSelector((state) => state.jobs.joblist)
   const dispatch = useAppDispatch()
   const currentList= useAppSelector((state) => state.jobs.clickStatus)
   // const userId = useAppSelector((state) => state.users.id)
-  console.log('ooooutside!!!,',jobs)
   const {userId} = useParams()
   console.log('id', userId)
   const {register, handleSubmit, formState: {errors}}= useForm({defaultValues: {company:'', job_title:'', list:currentList}})
@@ -30,7 +28,7 @@ export default function AddJob ({status, toggleOpen} : {status:Array<string>,tog
       return addJob(userId, data)
       .then(newJob =>{
         if (newJob !== undefined) {
-          dispatch(addOneJob(newJob))
+          dispatch(addOneJob(newJob.data))
         }
       })
       .then(() => toggleOpen())
@@ -73,7 +71,7 @@ export default function AddJob ({status, toggleOpen} : {status:Array<string>,tog
           </select>
         </Input>
         <Break text={null}/>
-        <Button text={"Discard"} type="light" onClick={toggleOpen}/>
+        <Button text={"Discard"} color="light" onClick={toggleOpen}/>
         {/* <Input height="mb-2" type="submit" value="Save" /> */}
         <input
           className="mx-2 bg-blue3 text-white hover:opacity-80 active:opacity-100 shadow-sx border rounded-md px-4 py-2 text-m my-2 focus:outline-none focus:ring-4"

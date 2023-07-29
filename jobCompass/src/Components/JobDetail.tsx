@@ -8,7 +8,7 @@ import convertTime from "../helpers/convertTime";
 import { useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { updateJob } from "../helpers/jobs";
-import { toggle } from "../features/details/detailSlice";
+import { toggle } from "../features/jobs/detailSlice";
 import { updateOneJob } from "../features/jobs/jobSlice";
 export default function JobDetail ({job}:{job:JobType}) {
   const dispatch = useAppDispatch()
@@ -16,7 +16,7 @@ export default function JobDetail ({job}:{job:JobType}) {
   const {register, handleSubmit, formState:{errors}} = useForm({defaultValues:job})
 
   const onSubmit: SubmitHandler<JobType> = (data) => {
-    console.log('added data:', data)
+    // console.log('added data:', data)
     if (userId) {
       updateJob(userId, data)
        .then((updated) => {
@@ -39,7 +39,7 @@ export default function JobDetail ({job}:{job:JobType}) {
              className="border-slate-700 max-w-fit px-2 py-1 text-sm border-1 font-semibold bg-blue3 text-white hover:opacity-80 active:opacity-100 shadow-sx border rounded-md my-2 focus:outline-none focus:ring-4"
             />
             <Button
-             type="light"
+             color="light"
              text="Close"
              class="max-w-fit px-2 py-1 text-sm font-semibold border border-gray-400"
              onClick = {() => dispatch(toggle())}
@@ -54,7 +54,7 @@ export default function JobDetail ({job}:{job:JobType}) {
           </div>
           <hr />
           <div className="my-5 mx-2">
-            <form>
+
               <div className="flex m-2 justify-between">
                 <Input required={true} height="mb-4 w-1/2 mr-2" type="text" id="company" defaultValue={job.company} placeholder="" register={register} erro={errors.company}/>
                 <Input required={true} height="mb-4 w-1/2" type="text" id="job_title" defaultValue={job.title} placeholder="" register={register} erro={errors.title}/>
@@ -72,7 +72,7 @@ export default function JobDetail ({job}:{job:JobType}) {
               <Input height="mb-4 w-1/2" type="text" id="location" defaultValue={job.location || ""} placeholder="+ add location" register={register} required={false}/>
               </div>
               <Input height="mb-4 m-2" inputClass="h-72" type="text" id="description" defaultValue={job.note || ""} placeholder="Add job decription" register={register} required={false} />
-            </form>
+
           </div>
         </div>
         <div className="pt-5 w-1/3 flex-col">

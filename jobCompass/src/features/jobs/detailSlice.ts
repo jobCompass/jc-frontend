@@ -4,10 +4,11 @@ import { JobType } from '../../helpers/propTypes'
 
 interface DetailState {
   open: boolean,
-  job: JobType
+  job: JobType,
+  index: number
 }
 
-const initialState: DetailState = {open:false, job:{company:'', title:'', status:'', timeline:{},}}
+const initialState: DetailState = {open:false, index:-1, job:{company:'', title:'', status:'', timeline:{},}}
 
 export const detailSlice = createSlice({
   name:'jobDetail',
@@ -16,8 +17,9 @@ export const detailSlice = createSlice({
     toggle: (state) => {
       state.open = !state.open
     },
-    setJob: (state, action:PayloadAction<JobType>) => {
-      state.job = action.payload
+    setJob: (state, action:PayloadAction<{index: number, job:JobType}>) => {
+      state.job = action.payload.job
+      state.index = action.payload.index
     },
 
   }
