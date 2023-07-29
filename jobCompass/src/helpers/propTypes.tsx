@@ -23,3 +23,14 @@ export type JobListType = {
 }
 
 export type Obj = { [propKey: string]: Array<JobType>};
+
+export interface AlertProps {
+  title:string,
+  message:string,
+  type?:string,
+  class?:string,
+  success?:string,
+  close?:string
+  onSuccess?: () => void,
+  onClose?:() => void,
+}

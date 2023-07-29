@@ -20,13 +20,12 @@ export const jobSlice = createSlice({
       state.clickStatus = action.payload.toUpperCase()
     },
     getJobList: (state, action:PayloadAction<Obj>) => {
-      console.log('payload: ', action.payload)
       state.joblist = action.payload
     },
     addOneJob: (state, action:PayloadAction<JobType>) => {
-      const list:string = action.payload.status
-      const cur = state.joblist
-      cur[list].push(action.payload)
+      const newJob = action.payload
+      const cur = {...state.joblist}
+      cur[newJob.status].push(action.payload)
       state.joblist = cur
     },
     dragJob: (state, action: PayloadAction<{index: number,status:string, target: string, updated: JobType}>) => {
@@ -34,7 +33,6 @@ export const jobSlice = createSlice({
       const cur = {...state.joblist}
       cur[status].splice(index, 1)
       cur[target].unshift(updated)
-      console.log('cccccur,,,', cur)
       state.joblist = cur
     },
     updateOneJob:(state, action:PayloadAction<JobType>) => {
@@ -43,12 +41,18 @@ export const jobSlice = createSlice({
       const index = cur[job.status].findIndex(x => x.id == job.id)
       cur[job.status][index] = job
       state.joblist = cur
+    },
+    deleteJob:(state, action:PayloadAction<{index:number, status:string}>) => {
+      const {index, status} = action.payload
+      const cur = {...state.joblist}
+      cur[status].splice(index, 1)
+      state.joblist=cur
     }
   },
   initialState,
 })
 
-export const {open, changeStatus, getJobList, addOneJob, dragJob, updateOneJob} = jobSlice.actions
+export const {open, changeStatus, getJobList, addOneJob, dragJob, updateOneJob, deleteJob} = jobSlice.actions
 export const selectStatus = (state: RootState) => state.jobs.clickStatus
 export const toggleOpen = (state: RootState) => state.jobs.open
 export default jobSlice.reducer

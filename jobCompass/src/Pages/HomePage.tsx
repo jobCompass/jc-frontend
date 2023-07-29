@@ -20,10 +20,10 @@ function HomePage() {
         <img className="logo" src={bigLogo} alt="logo"/>
 
         <a href="/signup">
-          <Button type="dark" class="w-full" text="Sign Up"/>
+          <Button color="dark" class="w-full" text="Sign Up"/>
         </a>
         <a href="/login">
-          <Button type="light" class="w-full" text="Log in"/>
+          <Button color="light" class="w-full" text="Log in"/>
         </a>
 
       </div>

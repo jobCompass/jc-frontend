@@ -58,4 +58,16 @@ const updateJob = async(userId: string, job: JobType, target?: string ) => {
   }
 }
 
-export {getUserJob, addJob, updateJob}
+const deleteOneJob = async (userId: string, id: string) => {
+  console.log('starting delete', userId, id)
+  try{
+    const res = await axios.delete(`${server}/${userId}/${id}`)
+    if (res.status == 200) {
+      return 'delete'
+    }
+  } catch(error) {
+    console.error('datelejob error: ', error)
+  }
+}
+
+export {getUserJob, addJob, updateJob, deleteOneJob}
