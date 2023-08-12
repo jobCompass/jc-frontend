@@ -5,10 +5,11 @@ import { Obj, JobType } from '../../helpers/propTypes'
 interface JobState {
   clickStatus: string,
   open: boolean,
-  joblist: Obj
+  origin:Obj,
+  joblist: Obj,
 }
 
-const initialState: JobState = { clickStatus:'', open:false, joblist:{}}
+const initialState: JobState = { clickStatus:'', open:false, origin:{}, joblist:{}}
 
 export const jobSlice = createSlice({
   name: 'addjob',
@@ -20,12 +21,14 @@ export const jobSlice = createSlice({
       state.clickStatus = action.payload.toUpperCase()
     },
     getJobList: (state, action:PayloadAction<Obj>) => {
+      state.origin = action.payload;
       state.joblist = action.payload
     },
     addOneJob: (state, action:PayloadAction<JobType>) => {
       const newJob = action.payload
       const cur = {...state.joblist}
       cur[newJob.status].push(action.payload)
+      state.origin = cur;
       state.joblist = cur
     },
     dragJob: (state, action: PayloadAction<{index: number,status:string, target: string, updated: JobType}>) => {
@@ -33,6 +36,7 @@ export const jobSlice = createSlice({
       const cur = {...state.joblist}
       cur[status].splice(index, 1)
       cur[target].unshift(updated)
+      state.origin = cur;
       state.joblist = cur
     },
     updateOneJob:(state, action:PayloadAction<JobType>) => {
@@ -40,6 +44,7 @@ export const jobSlice = createSlice({
       const cur = {...state.joblist}
       const index = cur[job.status].findIndex(x => x.id == job.id)
       cur[job.status][index] = job
+      state.origin = cur;
       state.joblist = cur
     },
     deleteJob:(state, action:PayloadAction<{index:number, status:string}>) => {
@@ -47,12 +52,25 @@ export const jobSlice = createSlice({
       const cur = {...state.joblist}
       cur[status].splice(index, 1)
       state.joblist=cur
-    }
+    },
+    searchJobs: (state, action:PayloadAction<string>) => {
+      const keyword = action.payload.toLowerCase();
+      const cur = {...state.origin};
+      const filtered = {...state.joblist};
+      for (const key in cur) {
+        filtered[key] = cur[key].filter(job => {
+          if (job.company.toLowerCase().includes(keyword) || job.title.toLowerCase().includes(keyword)) {
+            return job;
+          }
+        })
+      }
+      state.joblist = filtered;
+    },
   },
   initialState,
 })
 
-export const {open, changeStatus, getJobList, addOneJob, dragJob, updateOneJob, deleteJob} = jobSlice.actions
+export const {open, changeStatus, getJobList, addOneJob, dragJob, updateOneJob, deleteJob, searchJobs} = jobSlice.actions
 export const selectStatus = (state: RootState) => state.jobs.clickStatus
 export const toggleOpen = (state: RootState) => state.jobs.open
 export default jobSlice.reducer

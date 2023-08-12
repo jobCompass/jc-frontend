@@ -9,8 +9,10 @@ import JobDetail from "../Components/JobDetail";
 import Alert from "../Utilities/Alert";
 import { toggleAlert } from "../features/alert/alertSlice";
 import { deleteOneJob } from "../helpers/jobs";
+import NavBar from "../Components/NavBar";
+
 const hidden = "fixed inset-0 z-50 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
-const status = ['saved', 'applied', 'reject', 'phone interview', 'tech interview', 'final interview', 'offered']
+const status = ['saved', 'applied', 'reject', 'interview', 'tech interview', 'final interview', 'offered']
 
 function MainPage() {
   const { userId } = useParams()
@@ -21,7 +23,7 @@ function MainPage() {
   const alert = useAppSelector((state) => state.alert)
   //send request to get jobs
   const handleDelete = () => {
-    if (userId && curJob.index && curJob.job.id) {
+    if (userId && curJob.index > -1 && curJob.job.id) {
       deleteOneJob(userId, curJob.job.id)
       .then(() =>  {
         dispatch(toggleAlert())
@@ -44,7 +46,9 @@ function MainPage() {
 
 
   return (
-    <div className="flex flex-grow">
+    <div className="flex flex-col">
+      <NavBar />
+      <div className="flex flex-row">
       {openStatus &&
        <div className={hidden}><AddJob status={status} toggleOpen={() => dispatch(open())}/></div>
       }
@@ -59,6 +63,7 @@ function MainPage() {
         }
 
         )}
+      </div>
       </div>
     </div>
 
