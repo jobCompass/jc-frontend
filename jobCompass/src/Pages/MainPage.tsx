@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+
 import { useEffect } from "react";
 import {getUserJob} from "../helpers/jobs";
 import JobList from "../Components/JobList";
@@ -15,7 +15,8 @@ const hidden = "fixed inset-0 z-50 bg-gray-600 bg-opacity-50 overflow-y-auto h-f
 const status = ['saved', 'applied', 'reject', 'interview', 'tech interview', 'final interview', 'offered']
 
 function MainPage() {
-  const { userId } = useParams()
+
+  const userId = useAppSelector((state) => state.users.id)
   const openStatus = useAppSelector((state) => state.jobs.open)
   const curJob = useAppSelector((state) => state.details)
   const jobs = useAppSelector((state) => state.jobs.joblist)

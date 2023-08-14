@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import {auth, db} from "./fbconfig";
+
 // import * as dotenv from 'dotenv';
 import
   {
@@ -8,7 +9,10 @@ import
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
+    onAuthStateChanged,
     signOut,
+    User,
+
   } from "firebase/auth";
 import {collection, addDoc } from "firebase/firestore";
 import axios from "axios";
@@ -68,15 +72,18 @@ const sendPasswordReset = async (email:string) => {
     alert(err);
   }
 };
-
-const logout = () => {
-  signOut(auth);
+const handleAuthChanged = (cb: (user: User | null) => void) => {
+  return onAuthStateChanged(auth, cb)
+}
+const logout = async () => {
+  signOut(auth)
 };
 
 export {
   signInWithGoogle,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
+  handleAuthChanged,
   sendPasswordReset,
   logout,
 };

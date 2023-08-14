@@ -39,7 +39,7 @@ export default function SignUp({elem}: SignUpProps){
   return (
     <div className="relative inset-0 min-h-screen w-screen bg-blue1 ">
       <Modal>
-        <Logo />
+        <Logo size="12" align="center"/>
         <form className="px-8 pt-6 pb-8 mb-4"  onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4 text-left text-lg font-bold">{elem === 'login' ? "Log In" : "Sign up"}</div>
           <Input
