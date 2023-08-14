@@ -1,13 +1,18 @@
 
 
 import logo from '../assets/logo.svg';
-export default function Logo () {
+export default function Logo ({size, align, href}:{size:string, align:string, href?:string}) {
+
+  let style =""
+  if (align === "center") {
+    style += "mx-auto flex items-center justify-center"
+  }
   return (
     <a
-      className="mx-auto flex items-center justify-center h-12 w-12 rounded-full"
-      href="/"
+      className={style}
+      href={href || "/"}
     >
-      <img src={logo} alt="logo"  />
+      <img src={logo} alt="logo" className={`rouned-full h-${size} w-${size}`} />
     </a>
   )
 }

@@ -1,37 +1,38 @@
-// import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import HomePage from './Pages/HomePage.tsx';
 import SignUp from './Pages/SignUp.tsx';
 import MainPage from './Pages/MainPage.tsx';
-
-// import axios from 'axios';
+import { useAppDispatch, useAppSelector } from './store/hooks.ts';
+import { addId } from './features/users/userSlice.ts';
 import './App.css'
+import { handleAuthChanged } from './helpers/auth.ts';
 
 function App() {
-  // const [data, setData] = useState('')
+  const user = useAppSelector((state) => state.users.id)
+  const dispatch = useAppDispatch();
   // const url ="https://app-6lov3rzemq-uc.a.run.app/";
-  // useEffect(() => {
-  //   axios.get(url)
-  //     .then((res) => {
-  //       setData(res.data)
-  //     })
-  //     .catch(err => console.error(err))
-  // }, [])
+  useEffect(() => {
+    handleAuthChanged((curUser) => {
+      if (curUser) {
+        console.log('curUser', curUser.uid)
+        dispatch(addId(curUser.uid))
+      } else {
+        dispatch(addId(""))
+      }
+    })
+  }, [dispatch])
 
   return (
-    // <div className="container">
     <BrowserRouter>
+      {user.length > 0 && <Navigate to={`/${user}`} replace/>}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignUp elem="signup" />} />
         <Route path="/login" element={<SignUp elem="login" />} />
-        <Route path="/:userId" element={<MainPage />} />
+        <Route path="/:userId" element={user.length ? <MainPage /> : <Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
-
-     //   <HomePage /> */}
-    /* { !data ? null : <div>{data}</div>}
-    </div> */
   )
 }
 
