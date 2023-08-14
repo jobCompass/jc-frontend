@@ -1,5 +1,5 @@
 
-
+import Button from "../Utilities/Button";
 import { searchJobs } from "../features/jobs/jobSlice";
 import { useAppDispatch } from "../store/hooks";
 export default function NavBar () {
@@ -14,7 +14,9 @@ export default function NavBar () {
        onChange={handleSearch}
        type="text"
        className="h-6 text-sm border p-1 border-dashed"
-       placeholder="Filter"/>
+       placeholder="Filter"
+      />
+      <Button text="Log Out" class="text-sm m-1 py-0.5 border-gray-500 hover:bg-gray-100 "/>
     </div>
   )
 }
