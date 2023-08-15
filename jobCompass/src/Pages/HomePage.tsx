@@ -15,7 +15,7 @@ function HomePage() {
 
 
   return (
-    <div className="relative top-30 p-5 mx-auto">
+    <div className="top-30 w-screen max-w-fit m-auto">
       <div className="flex flex-col justify-center">
         <img className="logo" src={bigLogo} alt="logo"/>
 
@@ -25,7 +25,6 @@ function HomePage() {
         <a href="/login">
           <Button color="light" class="w-full" text="Log in"/>
         </a>
-
       </div>
       <Google />
 

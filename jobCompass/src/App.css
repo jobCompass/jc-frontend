@@ -8,16 +8,19 @@
 }
 
 .logo {
-  height: 15em;
-  padding: 1.5em;
+  height: 12rem;
+  min-width:fit-content;
+  max-width:min-content;
+  justify-self: center;
+  padding: 1.5rem;
   will-change: filter;
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 1.5em #0A9DE7);
+  filter: drop-shadow(0 0 1.5rem #0A9DE7);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2rem #61dafbaa);
 }
 
 :root {

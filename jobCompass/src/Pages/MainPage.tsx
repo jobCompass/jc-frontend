@@ -12,11 +12,12 @@ import { deleteOneJob } from "../helpers/jobs";
 import NavBar from "../Components/NavBar";
 
 const hidden = "fixed inset-0 z-50 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
-const status = ['saved', 'applied', 'reject', 'interview', 'tech interview', 'final interview', 'offered']
+const status = ['saved', 'applied', 'reject', 'screen', 'tech interview', 'final interview', 'offered']
 
 function MainPage() {
 
   const userId = useAppSelector((state) => state.users.id)
+  console.log('userid in mainpage:', userId)
   const openStatus = useAppSelector((state) => state.jobs.open)
   const curJob = useAppSelector((state) => state.details)
   const jobs = useAppSelector((state) => state.jobs.joblist)
@@ -59,8 +60,8 @@ function MainPage() {
       {alert.open && <div className={hidden}><Alert {...alert.alert} onClose={() => dispatch(toggleAlert())} onSuccess={handleDelete}/></div>}
       <div className="relative flex flex-row top-30 p-5 mx-auto snap-y">
         {status.map((type, i) => {
-          type = type.split(" ")[0] || type
-          return <JobList key={i} status={type} jobs={jobs[type] || []} toggleOpen={() => dispatch(open())} saveType = {() => dispatch(changeStatus(type))}/>
+          const temp = type.split(" ")[0] || type
+          return <JobList key={i} status={type} jobs={jobs[temp] || []} toggleOpen={() => dispatch(open())} saveType = {() => dispatch(changeStatus(type))}/>
         }
 
         )}

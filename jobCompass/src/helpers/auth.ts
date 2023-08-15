@@ -16,6 +16,7 @@ import
   } from "firebase/auth";
 import {collection, addDoc } from "firebase/firestore";
 import axios from "axios";
+import { FirebaseError } from "firebase/app";
 
 const server = import.meta.env.VITE_SERVER;
 // const server = 'http://127.0.0.1:5001/jobcampass-server/us-central1/app'
@@ -57,9 +58,11 @@ const registerWithEmailAndPassword = async (name:string, email:string, password:
       authProvider: "local",
       email,
     });
-  } catch (err) {
-    console.error(err);
-    alert(err);
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      console.log(error.message)
+      return error.code
+    }
   }
 };
 

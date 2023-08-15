@@ -11,7 +11,7 @@ type FormValues = {
 }
 
 const filterJobs = (arr:Array<JobType>) => {
-  const result: Obj = {'saved':[], 'applied':[], 'reject':[], 'phone':[], 'tech':[], 'final':[], 'offered':[]};
+  const result: Obj = {'saved':[], 'applied':[], 'reject':[], 'screen':[], 'tech':[], 'final':[], 'offered':[]};
   arr.forEach((job:JobType) => {result[job.status].push(job)});
   return result;
 }
@@ -19,7 +19,7 @@ const filterJobs = (arr:Array<JobType>) => {
 const getUserJob = (userId:string) => {
   return axios.get(`${server}/${userId}/getjob`)
     .then(result => {
-      console.log('result',result);
+      console.log('result',result, result.data.length);
       if (result.data.length > 0) {
         return filterJobs(result.data)
       } else {

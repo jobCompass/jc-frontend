@@ -17,8 +17,8 @@ export default function AddJob ({status, toggleOpen} : {status:Array<string>,tog
 
   const dispatch = useAppDispatch()
   const currentList= useAppSelector((state) => state.jobs.clickStatus)
-  // const userId = useAppSelector((state) => state.users.id)
-  const {userId} = useParams()
+  const userId = useAppSelector((state) => state.users.id)
+  // const {userId} = useParams()
   console.log('id', userId)
   const {register, handleSubmit, formState: {errors}}= useForm({defaultValues: {company:'', job_title:'', list:currentList}})
   const onSubmit: SubmitHandler<FormValues>=(data) => {
