@@ -3,11 +3,10 @@ import { AlertProps } from "../helpers/propTypes"
 export default function Alert(props:AlertProps) {
 
   return (
-    <div role="alert" className="border border-blue2 bg-white px-4 py-3 ruonded">
-      <div className="p-1"></div>
+    <div role="alert">
       <p className="font-bold">{props.title}</p>
       <p>{props.message}</p>
-      <div className="flex">
+      <div className="flex justify-center mt-5">
         {props.success && <Button text={props.success} color="dark" onClick={props.onSuccess}/>}
         {props.close &&  <Button text={props.close} color="light" onClick={props.onClose} />}
 

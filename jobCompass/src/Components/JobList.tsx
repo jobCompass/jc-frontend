@@ -6,13 +6,13 @@ import { useState } from 'react'
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { dragJob } from "../features/jobs/jobSlice";
 import { updateJob } from "../helpers/jobs";
-import { useParams } from "react-router-dom";
+
 
 type JobListProps = JobListType & {key:number, toggleOpen:()=>void, saveType: ()=>void};
 
 export default function JobList ({status, jobs, toggleOpen, saveType}:JobListProps) {
   const joblist = useAppSelector((state) => state.jobs.joblist)
-  const { userId } = useParams()
+  const userId = useAppSelector((state) => state.users.id)
   const [isDrage, setIsDrag] = useState(false)
   const dispatch = useAppDispatch()
   const handleDragOver = (e: React.DragEvent) => {
