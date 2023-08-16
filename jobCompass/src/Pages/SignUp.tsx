@@ -29,13 +29,11 @@ export default function SignUp({elem}: SignUpProps){
   const {register, handleSubmit, formState: {errors}}= useForm({defaultValues: {email:"", full_name:"", phone:"", password1:"", password2:""}})
   const text = elem === 'signup' ? "Log In" : "Sign Up";
   const onSubmit: SubmitHandler<FormValues>=(data) => {
-
     if (elem === 'login') {
       console.log("it's login"+data)
     } else {
       console.log('signup'+ JSON.stringify(data))
       if (data.password1 !== data.password2) {
-
         dispatch(setAlert({type:"error", title: "Error", message:"Passwords not match"}))
         dispatch(toggleAlert())
         return
@@ -43,13 +41,13 @@ export default function SignUp({elem}: SignUpProps){
       if (data.full_name) {
         registerWithEmailAndPassword(data.full_name, data.email, data.password1)
          .then((res) => {
+          console.log('res in signup', res)
           if (typeof(res) === 'string') {
-            // const msg = res.split(":")[1].split('(')[0];
-            console.log(res)
-            // alert(msg)
+            const msg = res.split('/')[1].split("-").map(word => (word[0].toUpperCase() + word.slice(1))).join(' ')
+            dispatch(setAlert({type:'error', title:'Error', message:msg}))
+            dispatch(toggleAlert())
           }
          })
-
       }
 
     }
