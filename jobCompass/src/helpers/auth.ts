@@ -41,7 +41,9 @@ const logInWithEmailAndPassword = async (email:string, password:string) => {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
-    alert(err);
+    if (err instanceof FirebaseError) {
+      return err.code
+    }
   }
 };
 
@@ -59,8 +61,6 @@ const registerWithEmailAndPassword = async (name:string, email:string, password:
         email,
       });
     }
-
-
   } catch (error) {
     if (error instanceof FirebaseError) {
       console.log(error.message)

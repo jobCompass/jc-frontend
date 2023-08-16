@@ -5,7 +5,7 @@ import Input from '../Utilities/Input';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Logo from '../Utilities/Logo';
-import { registerWithEmailAndPassword } from '../helpers/auth';
+import { logInWithEmailAndPassword, registerWithEmailAndPassword } from '../helpers/auth';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setAlert, toggleAlert } from '../features/alert/alertSlice';
 import Alert from '../Utilities/Alert';
@@ -28,11 +28,20 @@ export default function SignUp({elem}: SignUpProps){
   const alert = useAppSelector((state) => state.alert)
   const {register, handleSubmit, formState: {errors}}= useForm({defaultValues: {email:"", full_name:"", phone:"", password1:"", password2:""}})
   const text = elem === 'signup' ? "Log In" : "Sign Up";
+  const handleAlert = (data:string) => {
+    const msg = data.split('/')[1].split("-").map(word => (word[0].toUpperCase() + word.slice(1))).join(' ')
+    dispatch(setAlert({type:'error', title:'Error', message:msg}))
+    dispatch(toggleAlert())
+  }
   const onSubmit: SubmitHandler<FormValues>=(data) => {
     if (elem === 'login') {
-      console.log("it's login"+data)
+      console.log("it's login"+JSON.stringify(data))
+      logInWithEmailAndPassword(data.email, data.password1)
+       .then((res) => {
+        console.log('res??? login', res);
+        if (res) { handleAlert(res) }
+       })
     } else {
-      console.log('signup'+ JSON.stringify(data))
       if (data.password1 !== data.password2) {
         dispatch(setAlert({type:"error", title: "Error", message:"Passwords not match"}))
         dispatch(toggleAlert())
@@ -41,12 +50,7 @@ export default function SignUp({elem}: SignUpProps){
       if (data.full_name) {
         registerWithEmailAndPassword(data.full_name, data.email, data.password1)
          .then((res) => {
-          console.log('res in signup', res)
-          if (typeof(res) === 'string') {
-            const msg = res.split('/')[1].split("-").map(word => (word[0].toUpperCase() + word.slice(1))).join(' ')
-            dispatch(setAlert({type:'error', title:'Error', message:msg}))
-            dispatch(toggleAlert())
-          }
+          if (res) { handleAlert(res) }
          })
       }
 
