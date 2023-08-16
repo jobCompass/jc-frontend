@@ -22,21 +22,18 @@ const server = import.meta.env.VITE_SERVER;
 // const server = 'http://127.0.0.1:5001/jobcampass-server/us-central1/app'
 
 const googleProvider = new GoogleAuthProvider();
-const signInWithGoogle = () => {
-  return signInWithPopup(auth, googleProvider)
-    .then(res => {
-      const user = res.user;
-      return axios.post(`${server}/login/${user.uid}`, user)
-    })
-    .then(check => {
-      console.log('check', check);
-      return check.data;
-    })
-    .catch(err => {
-      if (err.code !=='auth/popup-closed-by-user'){
-        alert(err);
-      }
-    })
+const signInWithGoogle = async () => {
+  try {
+    const res = await signInWithPopup(auth, googleProvider);
+    const user = res.user;
+    const check = await axios.post(`${server}/login/${user.uid}`, user);
+
+    return check.data;
+  } catch (err) {
+    if (err instanceof FirebaseError && err.code !== 'auth/popup-closed-by-user') {
+      alert(err);
+    }
+  }
 };
 
 const logInWithEmailAndPassword = async (email:string, password:string) => {
@@ -44,7 +41,9 @@ const logInWithEmailAndPassword = async (email:string, password:string) => {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
-    alert(err);
+    if (err instanceof FirebaseError) {
+      return err.code
+    }
   }
 };
 
@@ -52,12 +51,16 @@ const registerWithEmailAndPassword = async (name:string, email:string, password:
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      name,
-      authProvider: "local",
-      email,
-    });
+    console.log(user)
+    const addtoDb = await axios.post(`${server}/user`, {uid: user.uid, email: email, displayName: name, photoURL: null})
+    if (addtoDb && addtoDb.status === 201) {
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name,
+        authProvider: "local",
+        email,
+      });
+    }
   } catch (error) {
     if (error instanceof FirebaseError) {
       console.log(error.message)

@@ -9,7 +9,7 @@ interface JobState {
   joblist: Obj,
 }
 
-const initialState: JobState = { clickStatus:'', open:false, origin:{}, joblist:{}}
+const initialState: JobState = { clickStatus:'', open:false, origin:{}, joblist:{'saved':[], 'applied':[], 'reject':[], 'screen':[], 'tech interview':[], 'final interview':[], 'offered':[]}}
 
 export const jobSlice = createSlice({
   name: 'addjob',
