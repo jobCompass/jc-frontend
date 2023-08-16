@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { addJob } from "../helpers/jobs";
 import { addOneJob } from "../features/jobs/jobSlice";
-import { useParams } from "react-router-dom";
+
 // import { JobType } from "../helpers/propTypes";
 type FormValues = {
   company: string;
