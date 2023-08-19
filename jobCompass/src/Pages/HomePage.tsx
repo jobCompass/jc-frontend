@@ -1,6 +1,7 @@
 import bigLogo from '../assets/Vector.png';
 import Button from '../Utilities/Button';
 import Google from '../Components/Google';
+import { logInWithEmailAndPassword } from '../helpers/auth';
 
 // type eventType = {
 //   target: HTMLElement,
@@ -12,7 +13,9 @@ function HomePage() {
   //   e.preventDefault();
   //   console.log("button clicked!", e.target.innerHTML)
   // }
-
+  const handleDemoClicked = () => {
+    logInWithEmailAndPassword("demo@jobcompass.com", "123456")
+  }
 
   return (
     <div className="top-30 w-screen max-w-fit m-auto">
@@ -27,6 +30,12 @@ function HomePage() {
         </a>
       </div>
       <Google />
+      <div>
+
+          <Button color="light" class="w-full" text="Try our demo" onClick={handleDemoClicked}/>
+
+
+      </div>
 
     </div>
 
