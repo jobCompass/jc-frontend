@@ -5,10 +5,11 @@ import Input from '../Utilities/Input';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Logo from '../Utilities/Logo';
-import { logInWithEmailAndPassword, registerWithEmailAndPassword } from '../helpers/auth';
+import { logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset } from '../helpers/auth';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setAlert, toggleAlert } from '../features/alert/alertSlice';
 import Alert from '../Utilities/Alert';
+import { useState } from 'react';
 type SignUpProps = {
   elem: string;
 }
@@ -23,6 +24,7 @@ type FormValues = {
 const hidden = "fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full"
 
 export default function SignUp({elem}: SignUpProps){
+  const [email, setEmail] = useState('')
   const navigate = useNavigate();
   const dispatch = useAppDispatch()
   const alert = useAppSelector((state) => state.alert)
@@ -53,11 +55,12 @@ export default function SignUp({elem}: SignUpProps){
           if (res) { handleAlert(res) }
          })
       }
-
     }
   }
-  function reSetPassword() {
-    console.log("reset button clicked!")
+  const reSetPassword = ()=>{
+    console.log('email', email)
+
+    sendPasswordReset(email)
   }
 
   return (
@@ -80,6 +83,8 @@ export default function SignUp({elem}: SignUpProps){
             id="email"
             required={true}
             placeholder="Emaill"
+            onChange={(e) => {console.log('e', e.target.value); setEmail(e.target.value)}}
+            value={email}
             register={register}
             erro = {errors.email}
           />

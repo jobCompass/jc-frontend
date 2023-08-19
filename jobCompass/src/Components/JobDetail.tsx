@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import Button from "../Utilities/Button";
+
 import Input from "../Utilities/Input";
 import Modal from "../Utilities/Modal";
 import { JobType } from "../helpers/propTypes";
@@ -10,6 +10,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { updateJob } from "../helpers/jobs";
 import { toggle } from "../features/jobs/detailSlice";
 import { updateOneJob } from "../features/jobs/jobSlice";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
 export default function JobDetail ({job}:{job:JobType}) {
   const dispatch = useAppDispatch()
   const {userId} = useParams()
@@ -29,7 +31,7 @@ export default function JobDetail ({job}:{job:JobType}) {
     }
   }
   return (
-    <Modal addClass="min-w-max max-w-4xl w-4/5 p-0" innerClass="mt-2">
+    <Modal addClass="min-w-2xl w-fit max-w-4xl w-4/5 p-0" innerClass="mt-2">
       <form className="flex px-2" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex basis-3/4 flex-col px-2 pr-5">
           <div className="text-right">
@@ -38,12 +40,10 @@ export default function JobDetail ({job}:{job:JobType}) {
              value="Save"
              className="border-slate-700 max-w-fit px-2 py-1 text-sm border-1 font-semibold bg-blue3 text-white hover:opacity-80 active:opacity-100 shadow-sx border rounded-md my-2 focus:outline-none focus:ring-4"
             />
-            <Button
-             color="light"
-             text="Close"
-             class="max-w-fit px-2 py-1 text-sm font-semibold border border-gray-400"
+            <button
+             className="ml-2 max-w-fit rounded-md px-2 py-1 text-sm font-semibold border border-gray-400 hover:bg-gray-100 shadow-sx  focus:outline-none focus:ring-4"
              onClick = {() => dispatch(toggle())}
-            />
+            >Close</button>
           </div>
           <div className="flex items-start mt-5 mb-10">
             <div className="self-center m-2 p-2">left icon</div>
@@ -71,8 +71,21 @@ export default function JobDetail ({job}:{job:JobType}) {
               </Input>
               <Input height="mb-4 w-1/2" type="text" id="location" defaultValue={job.location || ""} placeholder="+ add location" register={register} required={false}/>
               </div>
-              <Input height="mb-4 m-2" inputClass="h-72" type="text" id="description" defaultValue={job.note || ""} placeholder="Add job decription" register={register} required={false} />
+              {/* <Input height="mb-4 m-2" inputClass="h-72" type="textarea" id="description" defaultValue={job.note || ""} placeholder="Add job decription" register={register} required={false} /> */}
+              <div className="h-48 pb-8 max-w-4xl">
 
+              <ReactQuill
+                style={{height:'100%', textAlign:"left"}}
+                modules={{
+                  toolbar:[
+                    ['bold', 'italic', 'underline'],
+                    [{'list': 'ordered'}, {'list': 'bullet'}],
+                    ['link']
+                  ]
+                }}
+              />
+
+                 </div>
           </div>
         </div>
         <div className="pt-5 w-1/3 flex-col">

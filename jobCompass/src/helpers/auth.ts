@@ -52,7 +52,7 @@ const registerWithEmailAndPassword = async (name:string, email:string, password:
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     console.log(user)
-    const addtoDb = await axios.post(`${server}/user`, {uid: user.uid, email: email, displayName: name, photoURL: null})
+    const addtoDb = await axios.post(`${server}/user`, {uid: user.uid, email: email, displayName: name})
     if (addtoDb && addtoDb.status === 201) {
       await addDoc(collection(db, "users"), {
         uid: user.uid,
@@ -71,11 +71,12 @@ const registerWithEmailAndPassword = async (name:string, email:string, password:
 
 const sendPasswordReset = async (email:string) => {
   try {
-    await sendPasswordResetEmail(auth, email);
-    alert("Password reset link sent!");
+    const res = await sendPasswordResetEmail(auth, email);
+    return res;
   } catch (err) {
-    console.error(err);
-    alert(err);
+    if (err instanceof FirebaseError) {
+      return err.code
+    }
   }
 };
 const handleAuthChanged = (cb: (user: User | null) => void) => {
