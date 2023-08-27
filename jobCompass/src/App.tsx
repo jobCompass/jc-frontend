@@ -14,6 +14,7 @@ function App() {
   if(user === 'zs9wVxHlHZVCTnIUWnfOkV5MxCq2') {
     user = 'demo'
   }
+
   // const url ="https://app-6lov3rzemq-uc.a.run.app/";
   useEffect(() => {
     handleAuthChanged((curUser) => {
@@ -34,8 +35,7 @@ function App() {
         <Route path="/signup" element={<SignUp elem="signup" />} />
         <Route path="/login" element={<SignUp elem="login" />} />
         {user === 'zs9wVxHlHZVCTnIUWnfOkV5MxCq2' &&
-         <Route path="/demo" element={<MainPage />}/>
-        }
+        <Route path="/demo" element={<MainPage />}/>}
         <Route path="/:userId" element={user.length ? <MainPage /> : <Navigate to="/" replace />} />
 
 

@@ -3,22 +3,29 @@
 import Input from "../Utilities/Input";
 import Modal from "../Utilities/Modal";
 import { JobType } from "../helpers/propTypes";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import convertTime from "../helpers/convertTime";
-import { useParams } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { updateJob } from "../helpers/jobs";
 import { toggle } from "../features/jobs/detailSlice";
 import { updateOneJob } from "../features/jobs/jobSlice";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+import { useEffect } from "react";
 export default function JobDetail ({job}:{job:JobType}) {
   const dispatch = useAppDispatch()
-  const {userId} = useParams()
-  const {register, handleSubmit, formState:{errors}} = useForm({defaultValues:job})
+  const userId = useAppSelector((state) => state.users.id)
+  const {register, handleSubmit,setValue, watch, formState:{errors}} = useForm({defaultValues:job})
+  useEffect(() => {
+    register("description", { required: false })
+  }, [register])
+
+  const handleChange = (quillInput:string) => {
+    setValue("description", quillInput)
+  }
 
   const onSubmit: SubmitHandler<JobType> = (data) => {
-    // console.log('added data:', data)
+     console.log('added data:', data)
     if (userId) {
       updateJob(userId, data)
        .then((updated) => {
@@ -30,6 +37,7 @@ export default function JobDetail ({job}:{job:JobType}) {
        .catch((error) => console.error('err in update job detail:', error))
     }
   }
+  const quillInput = watch("description");
   return (
     <Modal addClass="min-w-2xl w-fit max-w-4xl w-4/5 p-0" innerClass="mt-2">
       <form className="flex px-2" onSubmit={handleSubmit(onSubmit)}>
@@ -71,21 +79,20 @@ export default function JobDetail ({job}:{job:JobType}) {
               </Input>
               <Input height="mb-4 w-1/2" type="text" id="location" defaultValue={job.location || ""} placeholder="+ add location" register={register} required={false}/>
               </div>
-              {/* <Input height="mb-4 m-2" inputClass="h-72" type="textarea" id="description" defaultValue={job.note || ""} placeholder="Add job decription" register={register} required={false} /> */}
               <div className="h-48 pb-8 max-w-4xl">
-
-              <ReactQuill
-                style={{height:'100%', textAlign:"left"}}
-                modules={{
-                  toolbar:[
-                    ['bold', 'italic', 'underline'],
-                    [{'list': 'ordered'}, {'list': 'bullet'}],
-                    ['link']
-                  ]
-                }}
-              />
-
-                 </div>
+                <ReactQuill
+                  style={{height:'100%', textAlign:"left"}}
+                  value={quillInput}
+                  onChange={handleChange}
+                  modules={{
+                    toolbar:[
+                      ['bold', 'italic', 'underline'],
+                      [{'list': 'ordered'}, {'list': 'bullet'}],
+                      ['link']
+                    ]
+                  }}
+                />
+              </div>
           </div>
         </div>
         <div className="pt-5 w-1/3 flex-col">
