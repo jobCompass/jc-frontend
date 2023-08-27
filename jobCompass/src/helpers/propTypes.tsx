@@ -11,6 +11,7 @@ export type JobType = {
   type?: string,
   salary?:string,
   location?: string,
+  description?:string,
   note?: string | null,
   status: string,
   update?: string,
