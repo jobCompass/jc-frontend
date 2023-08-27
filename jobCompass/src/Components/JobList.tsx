@@ -41,7 +41,7 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
 
   return (
     <div
-     className={`w-72 h-screen border snap-x ${isDrage ? "border-black" : ""}`}
+     className={`w-72 h-screen border snap-x`}
      onDragOver={handleDragOver}
      onDrop={handleDrop}
      id={status}
