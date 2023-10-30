@@ -14,7 +14,13 @@ function HomePage() {
   //   console.log("button clicked!", e.target.innerHTML)
   // }
   const handleDemoClicked = () => {
-    logInWithEmailAndPassword("demo@jobcompass.com", "123456")
+    try {
+      const login = logInWithEmailAndPassword("demo@jobcompass.com", "123456");
+      console.log('login demo: ', login)
+
+    } catch(error) {
+      console.log('login demo error:', error)
+    }
   }
 
   return (
@@ -23,18 +29,18 @@ function HomePage() {
         <img className="logo" src={bigLogo} alt="logo"/>
 
         <a href="/signup">
-          <Button color="dark" class="w-full" text="Sign Up"/>
+          <button className="btn-dark w-full"> Sign Up</button>
         </a>
         <a href="/login">
-          <Button color="light" class="w-full" text="Log in"/>
+          <button className="btn-light w-full">Log In</button>
         </a>
       </div>
       <Google />
       <div>
 
-          <Button color="light" class="w-full" text="Try our demo" onClick={handleDemoClicked}/>
-
-
+        <button className="btn-light w-full" onClick={handleDemoClicked}>
+          Try our Demo
+        </button>
       </div>
 
     </div>

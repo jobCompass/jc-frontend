@@ -28,13 +28,14 @@ export default function SignUp({elem}: SignUpProps){
   const navigate = useNavigate();
   const dispatch = useAppDispatch()
   const alert = useAppSelector((state) => state.alert)
-  const {register, handleSubmit, formState: {errors}}= useForm({defaultValues: {email:"", full_name:"", phone:"", password1:"", password2:""}})
+  const {register, handleSubmit, formState: {errors}, reset}= useForm({defaultValues: {email:"", full_name:"", phone:"", password1:"", password2:""}})
   const text = elem === 'signup' ? "Log In" : "Sign Up";
   const handleAlert = (data:string) => {
     const msg = data.split('/')[1].split("-").map(word => (word[0].toUpperCase() + word.slice(1))).join(' ')
     dispatch(setAlert({type:'error', title:'Error', message:msg}))
     dispatch(toggleAlert())
   }
+  
   const onSubmit: SubmitHandler<FormValues>=(data) => {
     if (elem === 'login') {
       console.log("it's login"+JSON.stringify(data))
@@ -83,8 +84,6 @@ export default function SignUp({elem}: SignUpProps){
             id="email"
             required={true}
             placeholder="Emaill"
-            onChange={(e) => {console.log('e', e.target.value); setEmail(e.target.value)}}
-            value={email}
             register={register}
             erro = {errors.email}
           />

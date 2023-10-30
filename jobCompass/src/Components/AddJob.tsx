@@ -1,7 +1,6 @@
 import Input from "../Utilities/Input"
 import Modal from "../Utilities/Modal"
 import Break from "../Utilities/Breakline"
-import Button from "../Utilities/Button"
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { addJob } from "../helpers/jobs";
@@ -71,7 +70,7 @@ export default function AddJob ({status, toggleOpen} : {status:Array<string>,tog
           </select>
         </Input>
         <Break text={null}/>
-        <Button text={"Discard"} color="light" onClick={toggleOpen}/>
+        <button className="btn-light" onClick={toggleOpen}>Discard</button>
         {/* <Input height="mb-2" type="submit" value="Save" /> */}
         <input
           className="mx-2 bg-blue3 text-white hover:opacity-80 active:opacity-100 shadow-sx border rounded-md px-4 py-2 text-m my-2 focus:outline-none focus:ring-4"

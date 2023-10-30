@@ -1,4 +1,3 @@
-import Button from "../Utilities/Button";
 import { JobType, JobListType } from "../helpers/propTypes";
 import Card from "./Card";
 import convertTime from "../helpers/convertTime";
@@ -41,7 +40,7 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
 
   return (
     <div
-     className={`w-72 h-screen border snap-x`}
+     className={`w-72 h-screen border-[.5px] border-gray-300 snap-x`}
      onDragOver={handleDragOver}
      onDrop={handleDrop}
      id={status}
@@ -50,15 +49,15 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
         <span>{status.toUpperCase()}</span></div>
       <div className="mb-6">{!jobs ||!jobs.length? '0' : jobs.length} JOBS</div>
       <div className="m-2">
-      <Button
-        class="w-full border-1 border-gray-100 hover:ring-1 hover:bg-white hover:ring-gray-200 focus:ring-1 focus:ring-blue4"
-        text="+"
-        color="light"
+      <button
+        className=" w-full border-[.5px] border-gray-500 hover:ring-1 hover:bg-white hover:ring-gray-200 focus:ring-1 focus:ring-blue4 shadow-md"
         onClick={() => {
           toggleOpen()
           saveType()
         }}
-      />
+      >
+        +
+      </button>
       </div>
       <div>
 

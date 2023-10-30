@@ -27,11 +27,12 @@ export default function NavBar () {
        className="ml-2 h-6 text-sm border p-1 border-dashed"
        placeholder="Filter"
       />
-      <Button
-       text="Log Out"
+      <button
        onClick={handleLogOut}
-       class="text-xs mx-2 pt-1 pb-1 border-gray-500 hover:bg-gray-100 "
-      />
+       className="text-xs mx-2 pt-1 pb-1 border-gray-500 hover:bg-gray-100 "
+      >
+        Log Out
+      </button>
     </div>
   )
 }
