@@ -6,6 +6,8 @@ export type statusName = 'saved' | 'applied' | 'reject' | 'phone interview'| 'te
 
 export type JobType = {
   id?: string,
+  logo?:string,
+  bgColor:string,
   title: string,
   company: string,
   type?: string,

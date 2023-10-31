@@ -1,23 +1,13 @@
 import bigLogo from '../assets/Vector.png';
-import Button from '../Utilities/Button';
 import Google from '../Components/Google';
 import { logInWithEmailAndPassword } from '../helpers/auth';
 
-// type eventType = {
-//   target: HTMLElement,
-//   preventDefault: () => void,
-// }
+
 function HomePage() {
 
-  // const buttonOnclick=(e:eventType) => {
-  //   e.preventDefault();
-  //   console.log("button clicked!", e.target.innerHTML)
-  // }
   const handleDemoClicked = () => {
     try {
-      const login = logInWithEmailAndPassword("demo@jobcompass.com", "123456");
-      console.log('login demo: ', login)
-
+      logInWithEmailAndPassword("demo@jobcompass.com", "123456");
     } catch(error) {
       console.log('login demo error:', error)
     }

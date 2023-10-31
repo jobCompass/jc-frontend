@@ -57,8 +57,12 @@ export default function JobDetail ({job, color}:{job:JobType, color:string}) {
           </div>
           <div className="flex items-start mt-5 mb-10">
             <div className="self-center mx-4">
+              {job.logo ?
+              <img src={job.logo} alt={`logo for ${job.company}`} height={60} width={60} className="rounded-full"/>
+              :
               <Avator color={color} name={job.company} round size="60" textSizeRatio={1}/>
-            </div>
+              }
+              </div>
             <div className="text-left">
               <h1 className="font-semibold text-4xl">{job.title}</h1>
               <h3 className="text-xl">{job.company}</h3>

@@ -12,11 +12,11 @@ type JobListProps = JobListType & {key:number, toggleOpen:()=>void, saveType: ()
 export default function JobList ({status, jobs, toggleOpen, saveType}:JobListProps) {
   const joblist = useAppSelector((state) => state.jobs.joblist)
   const userId = useAppSelector((state) => state.users.id)
-  const [isDrage, setIsDrag] = useState(false)
+  // const [isDrage, setIsDrag] = useState(false)
   const dispatch = useAppDispatch()
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    setIsDrag(true)
+    // setIsDrag(true)
   }
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -29,7 +29,7 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
         // send put request to server update the status
         updateJob(userId, joblist[status][index], target)
           .then((updated) => {
-            setIsDrag(false)
+
             if (updated !== undefined) {
               dispatch(dragJob({index, status, target, updated}))
             }
