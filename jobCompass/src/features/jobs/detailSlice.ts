@@ -8,7 +8,7 @@ interface DetailState {
   index: number
 }
 
-const initialState: DetailState = {open:false, index:-1, job:{company:'', title:'', status:'', timeline:{},}}
+const initialState: DetailState = {open:false, index:-1, job:{company:'', title:'', status:'', timeline:{}, bgColor:'#f5f6f7'}}
 
 export const detailSlice = createSlice({
   name:'jobDetail',

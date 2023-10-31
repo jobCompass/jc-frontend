@@ -1,7 +1,6 @@
 import { JobType, JobListType } from "../helpers/propTypes";
 import Card from "./Card";
 import convertTime from "../helpers/convertTime";
-import { useState } from 'react'
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { dragJob } from "../features/jobs/jobSlice";
 import { updateJob } from "../helpers/jobs";

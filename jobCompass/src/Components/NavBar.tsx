@@ -1,5 +1,4 @@
 
-import Button from "../Utilities/Button";
 import Logo from "../Utilities/Logo";
 import { searchJobs } from "../features/jobs/jobSlice";
 import { logout } from "../helpers/auth";
