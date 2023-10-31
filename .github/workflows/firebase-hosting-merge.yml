@@ -18,6 +18,7 @@ jobs:
           echo VITE_messagingSenderId=${{ secrets.VITE_MESSAGINGSENDERID }} >> .env
           echo VITE_measurementId=${{ secrets.VITE_MEASUREMENTID }} >> .env
           echo VITE_SERVER=${{ secrets.VITE_SERVER}} >> .env
+          echo VITE_logo_api=${{ secrets.VITE_logo_api }} >> .env
           npm install
           npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
