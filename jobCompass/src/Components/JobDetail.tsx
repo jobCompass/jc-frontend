@@ -12,7 +12,9 @@ import { updateOneJob } from "../features/jobs/jobSlice";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import { useEffect } from "react";
-export default function JobDetail ({job}:{job:JobType}) {
+import Avator from 'react-avatar';
+
+export default function JobDetail ({job, color}:{job:JobType, color:string}) {
   const dispatch = useAppDispatch()
   const userId = useAppSelector((state) => state.users.id)
   const {register, handleSubmit,setValue, watch, formState:{errors}} = useForm({defaultValues:job})
@@ -54,7 +56,13 @@ export default function JobDetail ({job}:{job:JobType}) {
             >Close</button>
           </div>
           <div className="flex items-start mt-5 mb-10">
-            <div className="self-center m-2 p-2">left icon</div>
+            <div className="self-center mx-4">
+              {job.logo ?
+              <img src={job.logo} alt={`logo for ${job.company}`} height={60} width={60} className="rounded-full"/>
+              :
+              <Avator color={color} name={job.company} round size="60" textSizeRatio={1}/>
+              }
+              </div>
             <div className="text-left">
               <h1 className="font-semibold text-4xl">{job.title}</h1>
               <h3 className="text-xl">{job.company}</h3>

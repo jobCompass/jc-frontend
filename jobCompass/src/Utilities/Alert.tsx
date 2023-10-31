@@ -1,4 +1,4 @@
-import Button from "./Button"
+
 import { AlertProps } from "../helpers/propTypes"
 export default function Alert(props:AlertProps) {
 
@@ -7,8 +7,8 @@ export default function Alert(props:AlertProps) {
       <p className="font-bold">{props.title}</p>
       <p>{props.message}</p>
       <div className="flex justify-center mt-5">
-        {props.success && <Button text={props.success} color="dark" onClick={props.onSuccess}/>}
-        {props.close &&  <Button text={props.close} color="light" onClick={props.onClose} />}
+        {props.success && <button className="btn-dark" onClick={props.onSuccess}>{props.success}</button>}
+        {props.close &&  <button className="btn-light" onClick={props.onClose}>{props.close}</button>}
 
       </div>
     </div>

@@ -1,8 +1,6 @@
-import Button from "../Utilities/Button";
 import { JobType, JobListType } from "../helpers/propTypes";
 import Card from "./Card";
 import convertTime from "../helpers/convertTime";
-import { useState } from 'react'
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { dragJob } from "../features/jobs/jobSlice";
 import { updateJob } from "../helpers/jobs";
@@ -13,11 +11,11 @@ type JobListProps = JobListType & {key:number, toggleOpen:()=>void, saveType: ()
 export default function JobList ({status, jobs, toggleOpen, saveType}:JobListProps) {
   const joblist = useAppSelector((state) => state.jobs.joblist)
   const userId = useAppSelector((state) => state.users.id)
-  const [isDrage, setIsDrag] = useState(false)
+  // const [isDrage, setIsDrag] = useState(false)
   const dispatch = useAppDispatch()
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    setIsDrag(true)
+    // setIsDrag(true)
   }
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -30,7 +28,7 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
         // send put request to server update the status
         updateJob(userId, joblist[status][index], target)
           .then((updated) => {
-            setIsDrag(false)
+
             if (updated !== undefined) {
               dispatch(dragJob({index, status, target, updated}))
             }
@@ -41,7 +39,7 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
 
   return (
     <div
-     className={`w-72 h-screen border snap-x ${isDrage ? "border-black" : ""}`}
+     className={`w-72 h-screen border-[.5px] border-gray-300 snap-x`}
      onDragOver={handleDragOver}
      onDrop={handleDrop}
      id={status}
@@ -50,15 +48,15 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
         <span>{status.toUpperCase()}</span></div>
       <div className="mb-6">{!jobs ||!jobs.length? '0' : jobs.length} JOBS</div>
       <div className="m-2">
-      <Button
-        class="w-full border-1 border-gray-100 hover:ring-1 hover:bg-white hover:ring-gray-200 focus:ring-1 focus:ring-blue4"
-        text="+"
-        color="light"
+      <button
+        className=" w-full border-[.5px] border-gray-500 hover:ring-1 hover:bg-white hover:ring-gray-200 focus:ring-1 focus:ring-blue4 shadow-md"
         onClick={() => {
           toggleOpen()
           saveType()
         }}
-      />
+      >
+        +
+      </button>
       </div>
       <div>
 

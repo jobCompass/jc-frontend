@@ -66,3 +66,17 @@ h1 {
   }
 }
 
+@layer base {
+  button {
+    @apply shadow-sm border rounded-md px-4 py-2 text-sm my-2 focus:outline-none focus:ring-4
+  }
+}
+
+@layer utilities {
+  .btn-light {
+    @apply bg-white border-blue3 border-2 hover:bg-gray-100 active:bg-white
+  };
+  .btn-dark {
+    @apply bg-blue3 text-white hover:opacity-80 active:opacity-100
+  }
+}

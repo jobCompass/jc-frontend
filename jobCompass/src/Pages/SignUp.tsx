@@ -1,5 +1,4 @@
 import Modal from '../Utilities/Modal';
-// import Button from '../Utilities/Button';
 import Google from '../Components/Google';
 import Input from '../Utilities/Input';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +8,7 @@ import { logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordRe
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setAlert, toggleAlert } from '../features/alert/alertSlice';
 import Alert from '../Utilities/Alert';
-import { useState } from 'react';
+// import { useState } from 'react';
 type SignUpProps = {
   elem: string;
 }
@@ -24,17 +23,18 @@ type FormValues = {
 const hidden = "fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full"
 
 export default function SignUp({elem}: SignUpProps){
-  const [email, setEmail] = useState('')
+  // const [email, setEmail] = useState('')
   const navigate = useNavigate();
   const dispatch = useAppDispatch()
   const alert = useAppSelector((state) => state.alert)
-  const {register, handleSubmit, formState: {errors}}= useForm({defaultValues: {email:"", full_name:"", phone:"", password1:"", password2:""}})
+  const {register, handleSubmit, formState: {errors}, getValues}= useForm({defaultValues: {email:"", full_name:"", phone:"", password1:"", password2:""}})
   const text = elem === 'signup' ? "Log In" : "Sign Up";
   const handleAlert = (data:string) => {
     const msg = data.split('/')[1].split("-").map(word => (word[0].toUpperCase() + word.slice(1))).join(' ')
     dispatch(setAlert({type:'error', title:'Error', message:msg}))
     dispatch(toggleAlert())
   }
+
   const onSubmit: SubmitHandler<FormValues>=(data) => {
     if (elem === 'login') {
       console.log("it's login"+JSON.stringify(data))
@@ -57,10 +57,15 @@ export default function SignUp({elem}: SignUpProps){
       }
     }
   }
-  const reSetPassword = ()=>{
-    console.log('email', email)
+  const reSetPassword=()=>{
+    const email = getValues('email')
+    if (!email.length) {
+      dispatch(setAlert({type:"error", title: "Error", message:"Please enter your email"}))
+      dispatch(toggleAlert())
+    } else {
+      sendPasswordReset(email)
+    }
 
-    sendPasswordReset(email)
   }
 
   return (
@@ -83,8 +88,6 @@ export default function SignUp({elem}: SignUpProps){
             id="email"
             required={true}
             placeholder="Emaill"
-            onChange={(e) => {console.log('e', e.target.value); setEmail(e.target.value)}}
-            value={email}
             register={register}
             erro = {errors.email}
           />

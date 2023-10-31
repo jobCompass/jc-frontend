@@ -13,11 +13,11 @@ import NavBar from "../Components/NavBar";
 
 const hidden = "fixed inset-0 z-50 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
 const status = ['saved', 'applied', 'reject', 'screen', 'tech interview', 'final interview', 'offered']
+const colors = ['red', 'blue', 'yellow', 'pink', 'green',  'oringe','steelblue','skyblue','navy','chocolate', 'purple','salmon','tomato','gold','khaki','lavender','thistle','plum','yellowgreen','lightcyan']
 
 function MainPage() {
 
   const userId = useAppSelector((state) => state.users.id)
-  console.log('userid in mainpage:', userId)
   const openStatus = useAppSelector((state) => state.jobs.open)
   const curJob = useAppSelector((state) => state.details)
   const jobs = useAppSelector((state) => state.jobs.joblist)
@@ -37,10 +37,10 @@ function MainPage() {
   }
   useEffect(() => {
     if (userId !== undefined){
-      console.log('in ', userId);
+      // console.log('in ', userId);
       getUserJob(userId)
         .then(result => {
-          console.log('list!!!', result);
+
           dispatch(getJobList(result))
         })
     }
@@ -55,13 +55,13 @@ function MainPage() {
        <div className={hidden}><AddJob status={status} toggleOpen={() => dispatch(open())}/></div>
       }
       {curJob.open &&
-      <div className={hidden}><JobDetail job={curJob.job}/></div>
+      <div className={hidden}><JobDetail job={curJob.job} color={colors[curJob.index]}/></div>
       }
       {alert.open && <div className={hidden}><Alert {...alert.alert} onClose={() => dispatch(toggleAlert())} onSuccess={handleDelete}/></div>}
       <div className="relative flex flex-row top-30 p-5 mx-auto snap-y">
         {status.map((type, i) => {
-          const temp = type.split(" ")[0] || type
-          return <JobList key={i} status={type} jobs={jobs[temp] || []} toggleOpen={() => dispatch(open())} saveType = {() => dispatch(changeStatus(type))}/>
+          const temp = type.split(" ")[0]
+          return <JobList key={i} status={temp} jobs={jobs[temp] || []} toggleOpen={() => dispatch(open())} saveType = {() => dispatch(changeStatus(type))}/>
         }
 
         )}

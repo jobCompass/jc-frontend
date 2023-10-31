@@ -27,7 +27,6 @@ const signInWithGoogle = async () => {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
     const check = await axios.post(`${server}/login/${user.uid}`, user);
-
     return check.data;
   } catch (err) {
     if (err instanceof FirebaseError && err.code !== 'auth/popup-closed-by-user') {
