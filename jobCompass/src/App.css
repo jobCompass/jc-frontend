@@ -78,5 +78,11 @@ h1 {
   };
   .btn-dark {
     @apply bg-blue3 text-white hover:opacity-80 active:opacity-100
+  };
+  .popup {
+    @apply fixed inset-0 z-50 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full
+  };
+  .detail_input {
+    @apply mb-2 md:mb-4 w-1/2
   }
 }

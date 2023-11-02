@@ -20,7 +20,6 @@ type FormValues = {
   password1: string;
   password2?:string;
 }
-const hidden = "fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full"
 
 export default function SignUp({elem}: SignUpProps){
   // const [email, setEmail] = useState('')
@@ -69,15 +68,12 @@ export default function SignUp({elem}: SignUpProps){
   }
 
   return (
-    <div className="relative inset-0 min-h-screen w-screen bg-blue1 ">
+    <div className="relative inset-0 min-h-screen w-screen md:bg-blue1 ">
       <Modal>
-        <Logo size="10" align="center"/>
+        <Logo size="60" align="center"/>
         {alert.open &&
-         <div className={hidden}>
-          <Modal>
+         <div className="popup flex flex-col justify-center items-center">
           <Alert {...alert.alert} onClose={() => dispatch(toggleAlert())} close="Get it"/>
-
-          </Modal>
         </div>}
 
         <form className="px-8 pt-6 pb-8 mb-4"  onSubmit={handleSubmit(onSubmit)}>

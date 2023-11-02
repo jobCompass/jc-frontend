@@ -11,7 +11,7 @@ type JobListProps = JobListType & {key:number, toggleOpen:()=>void, saveType: ()
 export default function JobList ({status, jobs, toggleOpen, saveType}:JobListProps) {
   const joblist = useAppSelector((state) => state.jobs.joblist)
   const userId = useAppSelector((state) => state.users.id)
-  // const [isDrage, setIsDrag] = useState(false)
+
   const dispatch = useAppDispatch()
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -39,15 +39,15 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
 
   return (
     <div
-     className={`w-72 h-screen border-[.5px] border-gray-300 snap-x`}
+     className={`md:w-72 h-screen md:border-[.5px] md:border-gray-300 md:snap-x`}
      onDragOver={handleDragOver}
      onDrop={handleDrop}
      id={status}
     >
-      <div className="text-l font-bold pt-2 mt-8 h-10">
+      <div className="text-l font-bold pt-2 md:mt-8 md:h-10">
         <span>{status.toUpperCase()}</span></div>
-      <div className="mb-6">{!jobs ||!jobs.length? '0' : jobs.length} JOBS</div>
-      <div className="m-2">
+      <div className="md:mb-6">{!jobs ||!jobs.length? '0' : jobs.length} JOBS</div>
+      <div className="md:m-2">
       <button
         className=" w-full border-[.5px] border-gray-500 hover:ring-1 hover:bg-white hover:ring-gray-200 focus:ring-1 focus:ring-blue4 shadow-md"
         onClick={() => {
