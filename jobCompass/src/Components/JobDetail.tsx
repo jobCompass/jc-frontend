@@ -13,6 +13,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import { useEffect } from "react";
 import Avator from 'react-avatar';
+// const status = ['saved', 'applied', 'reject', 'screen', 'tech interview', 'final interview', 'offered']
 
 export default function JobDetail ({job, color}:{job:JobType, color:string}) {
   const dispatch = useAppDispatch()
@@ -41,10 +42,22 @@ export default function JobDetail ({job, color}:{job:JobType, color:string}) {
   }
   const quillInput = watch("description");
   return (
-    <Modal addClass="min-w-2xl w-fit max-w-4xl w-4/5 p-0" innerClass="mt-2">
+    <Modal addClass="md:min-w-2xl md:w-fit md:max-w-4xl md:w-4/5 md:p-0" innerClass="md:mt-2 h-screen md:h-full">
       <form className="flex px-2" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex basis-3/4 flex-col px-2 pr-5">
+
           <div className="text-right">
+            {/* <div className="md:hidden flex flex-row text-xs">
+            Move to:
+            <select
+              className="rounded-md text-xs font-semibold border border-gray-400 h-fit w-1/3"
+              onChange={}
+            >
+              {status.map((type,i) =>
+              <option key={i} value={type}>{type.toUpperCase()}</option>
+              )}
+            </select>
+            </div> */}
             <input
              type="submit"
              value="Save"
@@ -55,7 +68,7 @@ export default function JobDetail ({job, color}:{job:JobType, color:string}) {
              onClick = {() => dispatch(toggle())}
             >Close</button>
           </div>
-          <div className="flex items-start mt-5 mb-10">
+          <div className="flex items-start md:mt-5 md:mb-10">
             <div className="self-center mx-4">
               {job.logo ?
               <img src={job.logo} alt={`logo for ${job.company}`} height={60} width={60} className="rounded-full"/>
@@ -64,28 +77,28 @@ export default function JobDetail ({job, color}:{job:JobType, color:string}) {
               }
               </div>
             <div className="text-left">
-              <h1 className="font-semibold text-4xl">{job.title}</h1>
-              <h3 className="text-xl">{job.company}</h3>
+              <h1 className="font-semibold text-lg md:text-4xl">{job.title}</h1>
+              <h3 className="tex-sm md:text-xl">{job.company}</h3>
             </div>
           </div>
           <hr />
-          <div className="my-5 mx-2">
+          <div className="md:my-5 md:mx-2">
 
-              <div className="flex m-2 justify-between">
-                <Input required={true} height="mb-4 w-1/2 mr-2" type="text" id="company" defaultValue={job.company} placeholder="" register={register} erro={errors.company}/>
-                <Input required={true} height="mb-4 w-1/2" type="text" id="job_title" defaultValue={job.title} placeholder="" register={register} erro={errors.title}/>
+              <div className="flex md:m-2 justify-between">
+                <Input required={true} height="detail_input mr-2" type="text" id="company" defaultValue={job.company} placeholder="" register={register} erro={errors.company}/>
+                <Input required={true} height="detail_input" type="text" id="job_title" defaultValue={job.title} placeholder="" register={register} erro={errors.title}/>
               </div>
-              <div className="flex m-2 justify-between">
-                <Input height="mb-4 w-1/2 mr-2" type="text" id="post_url" defaultValue={job.url || ""} placeholder="+ add URL" register={register} required={false} />
-                <Input height="mb-4 w-1/2" type="text" id="salary" defaultValue={job.salary || ""} placeholder="+ add salary" register={register} required={false} />
+              <div className="flex md:m-2 justify-between">
+                <Input height="detail_input mr-2" type="text" id="post_url" defaultValue={job.url || ""} placeholder="+ add URL" register={register} required={false} />
+                <Input height="detail_input" type="text" id="salary" defaultValue={job.salary || ""} placeholder="+ add salary" register={register} required={false} />
               </div>
-              <div className="flex m-2 justify-between">
-              <Input height="mb-4 mr-2 w-1/2" type="select" id="type" >
-                <select {...register('type')} defaultValue={job.type} className="block w-full appearance-none border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+              <div className="flex md:m-2 justify-between">
+              <Input height="detail_input mr-2" type="select" id="type" >
+                <select {...register('type')} defaultValue={job.type} className="block w-full appearance-none border rounded border-gray-400 hover:border-gray-500 md:px-4 md:py-2 md:pr-8 text-xs md:text-sm shadow leading-tight focus:outline-none focus:shadow-outline">
                   {['remote', 'hybrid', 'on-site'].map((el, i) => <option key={i}>{el.replace("-", " ").toUpperCase()}</option>)}
                 </select>
               </Input>
-              <Input height="mb-4 w-1/2" type="text" id="location" defaultValue={job.location || ""} placeholder="+ add location" register={register} required={false}/>
+              <Input height="detail_input" type="text" id="location" defaultValue={job.location || ""} placeholder="+ add location" register={register} required={false}/>
               </div>
               <div className="h-48 pb-8 max-w-4xl">
                 <ReactQuill
@@ -104,14 +117,14 @@ export default function JobDetail ({job, color}:{job:JobType, color:string}) {
           </div>
         </div>
         <div className="pt-5 w-1/3 flex-col">
-          <div className="font-xs font-semibold">Timeline</div>
+          <div className="text-sm md:text-lg font-semibold">Timeline</div>
           <hr/>
           {Object.keys(job.timeline).map((active,i)=>
             <li key={i} className="flex flex-row justify-between">
              <div className="flex">
                <div className="mr-2 w-[8px] h-[8px] rounded-full bg-slate-400 self-center"/>
                <div className="flex flex-col ">
-                 <div className="text-sm">{active} Job</div>
+                 <div className="text-xs md:text-sm capitalize">{active} Job</div>
                  <div className="text-xs font-light">You {active} Job</div>
                </div>
              </div>

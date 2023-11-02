@@ -9,8 +9,8 @@ export default function Modal({
   innerClass?:string,
 }){
   return (
-    <div className={`${addClass} relative top-20 mx-auto p-5 border-2 w-96 shadow-lg rounded-md bg-white`}>
-      <div className={`${innerClass} mt-2 text-center`}>
+    <div className={`${addClass} mt-8 md:mt-auto md:relative md:top-20 md:mx-auto md:p-5 md:border-2 md:w-96 md:shadow-lg md:rounded-md bg-white`}>
+      <div className={`${innerClass} md:mt-2 text-center`}>
 
         {children}
       </div>

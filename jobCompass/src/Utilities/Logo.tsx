@@ -12,7 +12,7 @@ export default function Logo ({size, align, href}:{size:string, align:string, hr
       className={style}
       href={href || "/"}
     >
-      <img src={logo} alt="logo" className={`rouned-full h-${size} w-${size}`} />
+      <img src={logo} alt="logo" className="rounded-full" height={size} width={size} />
     </a>
   )
 }

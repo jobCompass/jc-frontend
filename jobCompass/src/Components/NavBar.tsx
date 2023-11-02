@@ -18,8 +18,8 @@ export default function NavBar () {
       .catch(error => console.error(error))
   }
   return (
-    <div className="flex justify-left items-center text-left ml-5 mt-5 h-4">
-      <Logo size="10" align="left"/>
+    <div className="flex justify-left items-center text-left md:ml-5 mt-5 h-4">
+      <Logo size="30" align="left"/>
       <input
        onChange={handleSearch}
        type="text"
