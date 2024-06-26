@@ -2,20 +2,20 @@ import { JobType, JobListType } from "../helpers/propTypes";
 import Card from "./Card";
 import convertTime from "../helpers/convertTime";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { dragJob } from "../features/jobs/jobSlice";
+import { dragJob } from "../store/features/jobSlice";
 import { updateJob } from "../helpers/jobs";
 
 
-type JobListProps = JobListType & {key:number, toggleOpen:()=>void, saveType: ()=>void};
+type JobListProps = JobListType & {name:string,toggleOpen:()=>void, saveType: ()=>void};
 
-export default function JobList ({status, jobs, toggleOpen, saveType}:JobListProps) {
+const JobList:React.FC<JobListProps> = (
+  {name, status, jobs, toggleOpen, saveType}) => {
   const joblist = useAppSelector((state) => state.jobs.joblist)
   const userId = useAppSelector((state) => state.users.id)
-
+  console.log(status, jobs)
   const dispatch = useAppDispatch()
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    // setIsDrag(true)
   }
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -39,17 +39,17 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
 
   return (
     <div
-     className={`md:w-72 h-screen md:border-[.5px] md:border-gray-300 md:snap-x`}
+     className={`md:w-72 min-h-screen md:border-[.5px] md:border-gray-300 md:snap-x`}
      onDragOver={handleDragOver}
      onDrop={handleDrop}
      id={status}
     >
-      <div className="text-l font-bold pt-2 md:mt-8 md:h-10">
-        <span>{status.toUpperCase()}</span></div>
-      <div className="md:mb-6">{!jobs ||!jobs.length? '0' : jobs.length} JOBS</div>
+      <div className="text-l text-center font-bold pt-2 md:mt-8 md:h-10">
+        <span className="uppercase">{name}</span></div>
+      <div className="md:mb-6 text-center">{!jobs ||!jobs.length? '0' : jobs.length} JOBS</div>
       <div className="md:m-2">
       <button
-        className=" w-full border-[.5px] border-gray-500 hover:ring-1 hover:bg-white hover:ring-gray-200 focus:ring-1 focus:ring-blue4 shadow-md"
+        className="w-full border-[.5px] border-gray-500 hover:ring-1 hover:bg-white hover:ring-gray-200 focus:ring-1 focus:ring-blue4 shadow-md"
         onClick={() => {
           toggleOpen()
           saveType()
@@ -70,3 +70,5 @@ export default function JobList ({status, jobs, toggleOpen, saveType}:JobListPro
     </div>
   )
 }
+
+export default JobList;

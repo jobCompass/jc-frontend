@@ -1,9 +1,9 @@
 
 import Logo from "../Utilities/Logo";
-import { searchJobs } from "../features/jobs/jobSlice";
+import { searchJobs } from "../store/features/jobSlice";
 import { logout } from "../helpers/auth";
 import { useAppDispatch } from "../store/hooks";
-import { deleteId } from '../features/users/userSlice';
+import { deleteId } from '../store/features/userSlice';
 export default function NavBar () {
   const dispatch = useAppDispatch();
   const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => {

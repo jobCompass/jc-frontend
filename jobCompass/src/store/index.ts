@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import jobsReducer from '../features/jobs/jobSlice'
-import userReducer from '../features/users/userSlice'
-import detailReducer from '../features/jobs/detailSlice'
-import alertReducer from '../features/alert/alertSlice'
+import jobsReducer from './features/jobSlice'
+import userReducer from './features/userSlice'
+import detailReducer from './features/detailSlice'
+import alertReducer from './features/alertSlice'
 const store = configureStore({
   reducer: {
     jobs: jobsReducer,

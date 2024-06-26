@@ -2,7 +2,6 @@ export type TimeType = {
   _seconds: number,
   _nanoseconds: number
 }
-export type statusName = 'saved' | 'applied' | 'reject' | 'phone interview'| 'tech interview'| 'final interview'| 'offered'
 
 export type JobType = {
   id?: string,
@@ -22,10 +21,10 @@ export type JobType = {
 };
 export type JobListType = {
   status: string,
-  jobs: Array<JobType>
+  jobs: JobType[]
 }
 
-export type Obj = { [propKey: string]: Array<JobType>};
+export type Obj = { [propKey: string]: JobType[]};
 
 export interface AlertProps {
   title:string,

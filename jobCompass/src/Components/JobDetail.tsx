@@ -7,15 +7,16 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import convertTime from "../helpers/convertTime";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { updateJob } from "../helpers/jobs";
-import { toggle } from "../features/jobs/detailSlice";
-import { updateOneJob } from "../features/jobs/jobSlice";
+import { toggle } from "../store/features/detailSlice";
+import { updateOneJob } from "../store/features/jobSlice";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import { useEffect } from "react";
 import Avator from 'react-avatar';
+
 // const status = ['saved', 'applied', 'reject', 'screen', 'tech interview', 'final interview', 'offered']
 
-export default function JobDetail ({job, color}:{job:JobType, color:string}) {
+const JobDetail:React.FC<{job:JobType, color:string}> = ({job, color}) =>{
   const dispatch = useAppDispatch()
   const userId = useAppSelector((state) => state.users.id)
   const {register, handleSubmit,setValue, watch, formState:{errors}} = useForm({defaultValues:job})
@@ -138,3 +139,5 @@ export default function JobDetail ({job, color}:{job:JobType, color:string}) {
     </Modal>
   )
 }
+
+export default JobDetail;
