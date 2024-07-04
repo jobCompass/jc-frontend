@@ -1,9 +1,18 @@
+![logo](https://github.com/jobCompass/jc-frontend/assets/86500068/ebd180ca-cf2f-4cf0-9170-dabc0ca4b2e3)
+
 
 # jobCompass
 
-This is the frontend repo of JobCompass
+![jobCompass-demo-封面](https://github.com/jobCompass/jc-frontend/assets/86500068/a007e543-5de5-49a1-ae2e-334154b3a567)
+
+This is the frontend repo of JobCompass. Please feel free to try our website, and really appreciate if you can give any feedback to me.
 
 [JobCompass Website](https://jobcompass-frontend.web.app/)
+
+
+## Demo Video
+
+https://github.com/jobCompass/jc-frontend/assets/86500068/773f0950-8c9a-4377-974a-fc32a14ad5d2
 
 
 ### Description
