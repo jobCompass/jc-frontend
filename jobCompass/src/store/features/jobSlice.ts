@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../store'
 import { Obj, JobType } from '../../helpers/propTypes'
 import { APPLY_STATUS } from '../../const/const'
 // import { Timestamp } from "firebase/firestore";
