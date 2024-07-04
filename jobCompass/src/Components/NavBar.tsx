@@ -4,7 +4,8 @@ import { searchJobs } from "../store/features/jobSlice";
 import { logout } from "../helpers/auth";
 import { useAppDispatch } from "../store/hooks";
 import { deleteId } from '../store/features/userSlice';
-export default function NavBar () {
+
+const NavBar:React.FC = () => {
   const dispatch = useAppDispatch();
   const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -33,5 +34,7 @@ export default function NavBar () {
         Log Out
       </button>
     </div>
-  )
+ )
 }
+
+export default NavBar;

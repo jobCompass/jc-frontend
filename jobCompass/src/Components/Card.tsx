@@ -10,7 +10,7 @@ const border = "border rounded-md border-gray-200 shadow-lg"
 const hover ="hover:ring-1 hover:ring-gray-200";
 const focus ="focus:outline-none focus:ring-4";
 
-export default function Card ({index, job}:{index:number, job:JobType}) {
+const Card:React.FC<{index:number, job:JobType}> = ({index, job}) => {
   const [isHover, setHover] = useState(false)
   const dispatch = useAppDispatch()
   const handleDragStart = (e: React.DragEvent<HTMLLIElement>) => {
@@ -84,3 +84,5 @@ export default function Card ({index, job}:{index:number, job:JobType}) {
 
   )
 }
+
+export default Card;

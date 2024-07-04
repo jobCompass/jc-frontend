@@ -1,6 +1,6 @@
 
 import { AlertProps } from "../helpers/propTypes"
-export default function Alert(props:AlertProps) {
+const Alert: React.FC<AlertProps> = (props:AlertProps) => {
 
   return (
     <div role="alert" className="bg-white w-full md:w-1/3 rounded-md shadow-lg ring-gray-500/30 ring-2">
@@ -15,4 +15,4 @@ export default function Alert(props:AlertProps) {
   )
 }
 
-{/* <Alert title="alert" message="delete?" onSuccess={() => console.log('success cicked')} onClose={() => console.log('close')} /> */}
+export default Alert;

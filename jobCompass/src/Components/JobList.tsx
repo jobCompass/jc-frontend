@@ -9,10 +9,11 @@ import { updateJob } from "../helpers/jobs";
 type JobListProps = JobListType & {name:string,toggleOpen:()=>void, saveType: ()=>void};
 
 const JobList:React.FC<JobListProps> = (
-  {name, status, jobs, toggleOpen, saveType}) => {
+  {name, status, jobs, toggleOpen, saveType}
+) => {
   const joblist = useAppSelector((state) => state.jobs.joblist)
   const userId = useAppSelector((state) => state.users.id)
-  console.log(status, jobs)
+ 
   const dispatch = useAppDispatch()
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();

@@ -3,7 +3,7 @@ import google from '../assets/google.png';
 import {signInWithGoogle} from '../helpers/auth';
 import { useNavigate } from 'react-router-dom';
 
-export default function Google () {
+const Google:React.FC = ()=> {
   const naviagte = useNavigate()
   async function signIn () {
     try {
@@ -26,3 +26,5 @@ export default function Google () {
     </>
   )
 }
+
+export default Google;
