@@ -4,16 +4,16 @@ import Break from "../Utilities/Breakline"
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { addJob } from "../helpers/jobs";
-import { addOneJob } from "../features/jobs/jobSlice";
-
+import { addOneJob } from "../store/features/jobSlice";
+import { APPLY_STATUS } from "../const/const";
 // import { JobType } from "../helpers/propTypes";
 type FormValues = {
   company: string;
   job_title: string;
   list: string;
 }
-export default function AddJob ({status, toggleOpen} : {status:Array<string>,toggleOpen: () => void}) {
-
+const AddJob:React.FC<{toggleOpen: () => void}> = ({toggleOpen}) => {
+  const status =Object.values(APPLY_STATUS);
   const dispatch = useAppDispatch()
   const currentList= useAppSelector((state) => state.jobs.clickStatus)
   const userId = useAppSelector((state) => state.users.id)
@@ -84,3 +84,5 @@ export default function AddJob ({status, toggleOpen} : {status:Array<string>,tog
 
   )
 }
+
+export default AddJob;

@@ -4,7 +4,7 @@ import HomePage from './Pages/HomePage.tsx';
 import SignUp from './Pages/SignUp.tsx';
 import MainPage from './Pages/MainPage.tsx';
 import { useAppDispatch, useAppSelector } from './store/hooks.ts';
-import { addId } from './features/users/userSlice.ts';
+import { addId } from './store/features/userSlice.ts';
 import './App.css'
 import { handleAuthChanged } from './helpers/auth.ts';
 

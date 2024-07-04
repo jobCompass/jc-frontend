@@ -6,7 +6,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import Logo from '../Utilities/Logo';
 import { logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset } from '../helpers/auth';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { setAlert, toggleAlert } from '../features/alert/alertSlice';
+import { setAlert, toggleAlert } from '../store/features/alertSlice';
 import Alert from '../Utilities/Alert';
 // import { useState } from 'react';
 type SignUpProps = {

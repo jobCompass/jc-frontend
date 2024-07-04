@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../store'
 import { Obj, JobType } from '../../helpers/propTypes'
+import { APPLY_STATUS } from '../../const/const'
 // import { Timestamp } from "firebase/firestore";
 interface JobState {
   clickStatus: string,
   open: boolean,
   origin:Obj,
-  joblist: Obj,
+  joblist: Record<string, JobType[]>,
 }
 
 const initialState: JobState = { clickStatus:'', open:false, origin:{}, joblist:{'saved':[], 'applied':[], 'reject':[], 'screen':[], 'tech interview':[], 'final interview':[], 'offered':[]}}
@@ -28,7 +28,7 @@ export const jobSlice = createSlice({
       const newJob = action.payload
       let cur = {...state.joblist}
       if (JSON.stringify(cur) === '{}') {
-        cur = {'saved':[], 'applied':[], 'reject':[], 'screen':[], 'tech interview':[], 'final interview':[], 'offered':[]};
+        cur = {[APPLY_STATUS.SAVED]:[], [APPLY_STATUS.APPLIED]:[], 'reject':[], 'screen':[], 'tech interview':[], 'final interview':[], 'offered':[]};
       }
       cur[newJob.status].push(action.payload)
       state.origin = cur;
@@ -74,6 +74,4 @@ export const jobSlice = createSlice({
 })
 
 export const {open, changeStatus, getJobList, addOneJob, dragJob, updateOneJob, deleteJob, searchJobs} = jobSlice.actions
-export const selectStatus = (state: RootState) => state.jobs.clickStatus
-export const toggleOpen = (state: RootState) => state.jobs.open
 export default jobSlice.reducer
