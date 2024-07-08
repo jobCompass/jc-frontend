@@ -14,8 +14,6 @@ import 'react-quill/dist/quill.snow.css';
 import { useEffect } from "react";
 import Avator from 'react-avatar';
 
-// const status = ['saved', 'applied', 'reject', 'screen', 'tech interview', 'final interview', 'offered']
-
 const JobDetail:React.FC<{job:JobType, color:string}> = ({job, color}) =>{
   const dispatch = useAppDispatch()
   const userId = useAppSelector((state) => state.users.id)
@@ -48,17 +46,6 @@ const JobDetail:React.FC<{job:JobType, color:string}> = ({job, color}) =>{
         <div className="flex basis-3/4 flex-col px-2 pr-5">
 
           <div className="text-right">
-            {/* <div className="md:hidden flex flex-row text-xs">
-            Move to:
-            <select
-              className="rounded-md text-xs font-semibold border border-gray-400 h-fit w-1/3"
-              onChange={}
-            >
-              {status.map((type,i) =>
-              <option key={i} value={type}>{type.toUpperCase()}</option>
-              )}
-            </select>
-            </div> */}
             <input
              type="submit"
              value="Save"

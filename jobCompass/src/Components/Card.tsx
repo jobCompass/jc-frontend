@@ -6,6 +6,7 @@ import {RiDeleteBin6Line } from "react-icons/ri";
 import { toggleAlert, setAlert } from '../store/features/alertSlice';
 import Avatar from 'react-avatar';
 import { getBgColor, textColor } from '../helpers/colors';
+
 const border = "border rounded-md border-gray-200 shadow-lg"
 const hover ="hover:ring-1 hover:ring-gray-200";
 const focus ="focus:outline-none focus:ring-4";
@@ -51,21 +52,22 @@ const Card:React.FC<{index:number, job:JobType}> = ({index, job}) => {
         dispatch(toggle())
       }}
     >
-      <div className='h-full m-2 flex justify-start relative'>
-        <div className="w-8 mr-1">
+      {/* <div className="m-2 flex flex-row text-sm text-left relative">
+        <div className="mr-2 w-[2.5rem]"> */}
+      <div className='h-full m-2 flex justify-start relative gap-1 overflow-hidden'>
+        <div className="w-8 h-8">
           {job.logo ?
-            <img src={job.logo} alt={`logo for ${job.company}`} height={30} width={30} className='object-fill rounded-full'/>
-          : <Avatar color={job.bgColor} name={job.company} size="30" textSizeRatio={1.5} round/>
+            <img src={job.logo} alt={`logo for ${job.company}`} className='object-fill rounded-full w-8 h-8'/>
+          : <Avatar fgColor={job.bgColor} name={job.company} size="30" textSizeRatio={1.5} round/>
           }
         </div>
 
-        <div className="flex flex-col px-1 gap-1">
-          <p className='uppercase font-semibold'>{job.title}</p>
+        <div className="w-10/12 flex flex-col px-1 gap-1">
+          <p className={`${job.title.length > 35 ? 'text-sm' : 'text-l'} uppercase font-semibold`}>{job.title}</p>
           <div className="flex justify-between items-baseline">
             <div className='capitalize'>{job.company}</div>
           </div>
-        </div>
-        <div className="absolute right-0 top-5">
+          <div className="absolute right-0 top-5">
           {isHover &&
                   <button
                   className={`p-0 shadow-sx rounded-full cursor-pointer border-gray-200 self-end ${focus} ${hover}`}
@@ -77,9 +79,14 @@ const Card:React.FC<{index:number, job:JobType}> = ({index, job}) => {
                   </button>
           }
         </div>
-        <div className="absolute bottom-3 right-0 text-[0.6rem] text-right">{job.update} ago</div>
+          <div className="absolute bottom-3 right-0 text-[0.6rem] text-right">{job.update} ago</div>
+        </div>
+
+
 
       </div>
+
+
     </li>
 
   )
