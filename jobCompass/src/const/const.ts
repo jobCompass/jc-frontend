@@ -4,5 +4,6 @@ export const APPLY_STATUS:Record<string, string> = {
   'REJECT':'reject',
   'SCREEN':'hr screen',
   'tech':'tech interview',
-  'final':'final interview'
+  'final':'final interview',
+  'OFFER':'offer'
 }

@@ -13,7 +13,7 @@ const JobList:React.FC<JobListProps> = (
 ) => {
   const joblist = useAppSelector((state) => state.jobs.joblist)
   const userId = useAppSelector((state) => state.users.id)
- 
+
   const dispatch = useAppDispatch()
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -59,7 +59,7 @@ const JobList:React.FC<JobListProps> = (
         +
       </button>
       </div>
-      <div>
+      <div className="h-screen overflow-y-auto">
 
         <ul>
           {jobs.map((job: JobType, j:number) => {

@@ -10,8 +10,12 @@ type FormValues = {
 }
 
 const filterJobs = (arr:Array<JobType>) => {
-  const result: Obj = {'saved':[], 'applied':[], 'reject':[], 'screen':[], 'tech':[], 'final':[], 'offered':[]};
-  arr.forEach((job:JobType) => {result[job.status].push(job)});
+  console.log('result',arr);
+  const result: Obj = {'saved':[], 'applied':[], 'reject':[], 'screen':[], 'tech':[], 'final':[], 'offer':[]};
+  arr.forEach((job:JobType) => {
+    console.log('statue', job.status);
+    result[job.status].push(job)});
+  console.log('filtered:', result);
   return result;
 }
 

@@ -28,7 +28,7 @@ export const jobSlice = createSlice({
       const newJob = action.payload
       let cur = {...state.joblist}
       if (JSON.stringify(cur) === '{}') {
-        cur = {[APPLY_STATUS.SAVED]:[], [APPLY_STATUS.APPLIED]:[], 'reject':[], 'screen':[], 'tech interview':[], 'final interview':[], 'offered':[]};
+        cur = {[APPLY_STATUS.SAVED]:[], [APPLY_STATUS.APPLIED]:[], 'reject':[], 'screen':[], 'tech interview':[], 'final interview':[], 'offer':[]};
       }
       cur[newJob.status].push(action.payload)
       state.origin = cur;
